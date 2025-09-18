@@ -258,7 +258,7 @@
 
     function openModal(url){
       pendingUrl = url;
-      // 確保每次打開都是全新狀態
+      // 每次打開都重置狀態
       checkbox.checked = false;
       agreeBtn.disabled = true;
       modal.classList.add('show');
@@ -269,7 +269,7 @@
       modal.setAttribute('aria-hidden','true');
     }
     function revokeIfPending(){
-      // 使用者選擇不同意：確保沒有殘留的同意紀錄
+      // 使用者不同意/關閉：確保沒有殘留同意紀錄
       if(!hasAccepted()) localStorage.removeItem(STORAGE_KEY);
       pendingUrl = null;
       closeModal();
@@ -284,24 +284,31 @@
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') revokeIfPending(); });
 
     function attachConsent(anchor){
-      if (anchor.dataset.consentBound) return; // 避免重複綁定
+      // 避免重複綁定
+      if (anchor.dataset.consentBound) return;
       anchor.dataset.consentBound = '1';
       anchor.addEventListener('click', (e)=>{
         if(hasAccepted()) return; // 已同意直接放行
         e.preventDefault();
-        const url = anchor.getAttribute('href');
-        openModal(url);
+        openModal(anchor.getAttribute('href'));
       });
     }
 
-    // 自動對所有下載連結套同意書（/releases/、.exe、.msi、.zip）
-    const downloadLinkSelector = 'a[href*="/releases/"], a[href$=".exe"], a[href$=".msi"], a[href$=".zip"]';
-    document.querySelectorAll(downloadLinkSelector).forEach(attachConsent);
+    // 穩綁不漏：自動抓取 + 後備 by id
+    (function(){
+      const selector = 'a[href*="/releases/"], a[href$=".exe"], a[href$=".msi"], a[href$=".zip"]';
+      const set = new Set(document.querySelectorAll(selector));
+      ['download','download-hero'].forEach(id=>{
+        const el = document.getElementById(id);
+        if (el) set.add(el);
+      });
+      set.forEach(attachConsent);
+    })();
 
     agreeBtn.addEventListener('click', ()=>{
       if(checkbox.checked && pendingUrl){
         localStorage.setItem(STORAGE_KEY,'yes');
-        const url = pendingUrl; // 儲存後立即導向
+        const url = pendingUrl; // 先存再跳，避免 race condition
         pendingUrl = null;
         closeModal();
         window.location.href = url;
