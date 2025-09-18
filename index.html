@@ -1,67 +1,78 @@
 <!doctype html>
-</ul>
-</div>
-</div>
-</section>
+const closeX = document.getElementById('consent-close');
+const checkbox = document.getElementById('consent-check');
 
 
-<section id="faq" class="section card">
-<h2>常見問題</h2>
-<dl class="faq">
-<dt>需要網路嗎？</dt>
-<dd>不需要。PocketEditor 可於 Windows 本機離線執行。</dd>
-<dt>字幕亂碼怎麼辦？</dt>
-<dd>請使用「Microsoft JhengHei UI」或其他含中文字型，並確認 FFmpeg 的 subtitles 濾鏡跳脫已處理。</dd>
-<dt>是否支援 GUI？</dt>
-<dd>目前為 CLI，後續會推出 GUI 測試版。</dd>
-</dl>
-</section>
-</div>
+let pendingUrl = null; let pendingNewTab = false;
+const NEED = /\/releases\/|\.exe$|\.msi$|\.zip$/i;
+const hasAccepted = () => false; // 永遠每次詢問（不記錄）
 
 
-<footer>
-<nav>
-<a href="privacy.html">隱私權政策</a>
-<a href="eula.html">授權/EULA</a>
-<a href="mailto:hello@smartcut.app">聯絡我們</a>
-</nav>
-<div>© <span id="y"></span> PocketEditor</div>
-</footer>
-</div>
+function openModal(url, openInNewTab){
+pendingUrl = url; pendingNewTab = !!openInNewTab;
+checkbox.checked = false; agreeBtn.disabled = true;
+modal.style.display = 'flex';
+modal.classList.add('show');
+modal.setAttribute('aria-hidden','false');
+}
+function closeModal(){
+modal.classList.remove('show');
+modal.setAttribute('aria-hidden','true');
+modal.style.display = 'none';
+}
 
 
-<!-- 安裝同意書：Modal（加上 style="display:none"，就算 CSS 沒載入也不會露出） -->
-<div id="consent-modal" class="modal" style="display:none" aria-hidden="true" role="dialog" aria-modal="true">
-<div class="dialog" role="document" style="position:relative">
-<button class="close-x" id="consent-close" aria-label="關閉">×</button>
-<h3>安裝同意書</h3>
-<p class="muted">下載前，請閱讀並同意 <a href="eula.html" target="_blank" rel="noopener">最終用戶授權合約（EULA）</a> 與
-<a href="privacy.html" target="_blank" rel="noopener">隱私權政策</a>。您也可保留一份副本。</p>
-<label style="display:flex;gap:8px;align-items:flex-start;margin-top:10px">
-<input type="checkbox" id="consent-check" style="margin-top:4px">
-<span>我已閱讀並同意上述條款，且年滿法定年齡。</span>
-</label>
-<div class="actions">
-<button class="btn secondary" id="consent-cancel">不同意</button>
-<button class="btn" id="consent-agree" disabled>同意並下載</button>
-</div>
-<p class="muted" style="margin-top:6px">此同意不會被記錄，您每次下載都會再次看到本提示。</p>
-</div>
-</div>
+checkbox.addEventListener('change', ()=>{ agreeBtn.disabled = !checkbox.checked; });
+cancelBtn.addEventListener('click', ()=>{ pendingUrl=null; pendingNewTab=false; closeModal(); });
+closeX.addEventListener('click', ()=>{ pendingUrl=null; pendingNewTab=false; closeModal(); });
+modal.addEventListener('click', (e)=>{ if(e.target===modal){ pendingUrl=null; pendingNewTab=false; closeModal(); } });
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ pendingUrl=null; pendingNewTab=false; closeModal(); } });
 
 
-<noscript>
-<div style="margin:12px 0;padding:12px;border:1px solid #b00;color:#b00;background:#fff3f3;border-radius:8px">
-您的瀏覽器已停用 JavaScript，因此無法顯示安裝同意書與下載按鈕。
-請先啟用 JavaScript，或直接前往
-<a href="https://github.com/martin310365123-byte/PocketEditor/releases/latest" rel="noopener">GitHub Releases</a>
-下載（請先閱讀並遵循 EULA/隱私權政策）。
-</div>
-</noscript>
+function needConsentFor(el){
+const url = (el.getAttribute('data-href') || el.getAttribute('href') || '').trim();
+if(!url) return null;
+if(el.hasAttribute('data-need-consent')) return url;
+if(NEED.test(url)) return url;
+return null;
+}
+function bind(el){
+if(!el || el.dataset.consentBound==='1') return;
+const url = needConsentFor(el);
+if(!url) return;
+el.setAttribute('data-href', url);
+if(el.tagName.toLowerCase()==='a'){
+el.removeAttribute('href');
+el.setAttribute('role','button');
+el.setAttribute('tabindex','0');
+}
+const handler = (openNew)=>{
+if(hasAccepted()){
+if(openNew) window.open(url,'_blank'); else window.location.assign(url);
+return;
+}
+openModal(url, !!openNew);
+};
+el.addEventListener('pointerdown', (e)=>{ e.preventDefault(); }, true);
+el.addEventListener('click', (e)=>{ e.preventDefault(); handler(e.metaKey||e.ctrlKey||el.target==='_blank'); }, true);
+el.addEventListener('auxclick', (e)=>{ if(e.button===1){ e.preventDefault(); handler(true); } }, true);
+el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); handler(false); } }, true);
+el.dataset.consentBound='1';
+}
+function scanAll(){ document.querySelectorAll('a,button').forEach(bind); }
+scanAll();
+const mo = new MutationObserver(()=>{ scanAll(); });
+mo.observe(document.body, { childList:true, subtree:true, attributes:true, attributeFilter:['href','data-href'] });
 
 
-<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
-<!-- ✅ 外掛同意書攔截邏輯（Edge 相容） -->
-<script src="consent.js"></script>
+agreeBtn.addEventListener('click', ()=>{
+if(checkbox.checked && pendingUrl){
+const url = pendingUrl; const openNew = pendingNewTab;
+pendingUrl=null; pendingNewTab=false; closeModal();
+if(openNew) window.open(url,'_blank'); else window.location.assign(url);
+}
+});
+})();
+</script>
 </body>
 </html>
