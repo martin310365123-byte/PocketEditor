@@ -24,7 +24,7 @@
     .logo{display:flex;align-items:center;gap:12px}
     .logo-badge{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--acc),#33d6a6);box-shadow:0 6px 18px rgba(139,229,139,.35)}
     nav a{margin-left:20px;opacity:.9}
-    .btn{display:inline-block;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,var(--acc2),#6fe3ff);color:#0b1220;font-weight:700;box-shadow:0 8px 20px rgba(111,227,255,.25);border:1px solid rgba(255,255,255,.08)}
+    .btn{display:inline-block;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,var(--acc2),#6fe3ff);color:#0b1220;font-weight:700;box-shadow:0 8px 20px rgba(111,227,255,.25);border:1px solid rgba(255,255,255,.08);cursor:pointer}
     .btn.secondary{background:#1a2233;color:var(--text);border:1px solid #2b3550}
     .btn[disabled]{opacity:.55;cursor:not-allowed}
     .hero{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:center;margin-top:24px}
@@ -84,7 +84,8 @@
         <a href="#how">使用方式</a>
         <a href="#pricing">方案</a>
         <a href="#faq">常見問題</a>
-        <a class="btn" id="download" href="https://github.com/martin310365123-byte/PocketEditor/releases/latest">下載</a>
+        <!-- 超兇：改成 button，下載導向交給 JS -->
+        <button class="btn" id="download" type="button" data-href="https://github.com/martin310365123-byte/PocketEditor/releases/latest" data-need-consent>下載</button>
       </nav>
     </header>
 
@@ -99,7 +100,8 @@
           <span class="badge">支援繁中字幕</span>
         </div>
         <div class="cta">
-          <a class="btn" id="download-hero" href="https://github.com/martin310365123-byte/PocketEditor/releases/latest">下載封測版</a>
+          <!-- 超兇：這顆也改成 button -->
+          <button class="btn" id="download-hero" type="button" data-href="https://github.com/martin310365123-byte/PocketEditor/releases/latest" data-need-consent>下載封測版</button>
           <a class="btn secondary" href="https://github.com/martin310365123-byte/PocketEditor/issues/new/choose">回報問題 / 提案</a>
         </div>
         <p class="muted" style="margin-top:8px">目前以 <strong>PocketEditor v4.x</strong> 為核心（字幕流暢優化、剪輯與 BGM 正常），之後將新增 GUI 與雲端部署。</p>
@@ -242,7 +244,7 @@
     // 年份
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // === 安裝同意書（前端 gating） ===
+    // === 安裝同意書（超兇版：button 強制 + 事件委派） ===
     const EULA_VERSION = '2025-09-18'; // 當 eula.html 有重大更新時請同步修改
     const STORAGE_KEY = `pe_eula_accept_${EULA_VERSION}`;
 
@@ -258,7 +260,6 @@
 
     function openModal(url){
       pendingUrl = url;
-      // 每次打開都重置狀態
       checkbox.checked = false;
       agreeBtn.disabled = true;
       modal.classList.add('show');
@@ -269,7 +270,6 @@
       modal.setAttribute('aria-hidden','true');
     }
     function revokeIfPending(){
-      // 使用者不同意/關閉：確保沒有殘留同意紀錄
       if(!hasAccepted()) localStorage.removeItem(STORAGE_KEY);
       pendingUrl = null;
       closeModal();
@@ -283,32 +283,25 @@
     modal.addEventListener('click', (e)=>{ if(e.target === modal) revokeIfPending(); });
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') revokeIfPending(); });
 
-    function attachConsent(anchor){
-      // 避免重複綁定
-      if (anchor.dataset.consentBound) return;
-      anchor.dataset.consentBound = '1';
-      anchor.addEventListener('click', (e)=>{
-        if(hasAccepted()) return; // 已同意直接放行
-        e.preventDefault();
-        openModal(anchor.getAttribute('href'));
-      });
-    }
-
-    // 穩綁不漏：自動抓取 + 後備 by id
-    (function(){
-      const selector = 'a[href*="/releases/"], a[href$=".exe"], a[href$=".msi"], a[href$=".zip"]';
-      const set = new Set(document.querySelectorAll(selector));
-      ['download','download-hero'].forEach(id=>{
-        const el = document.getElementById(id);
-        if (el) set.add(el);
-      });
-      set.forEach(attachConsent);
-    })();
+    // 事件委派：攔所有帶 data-need-consent 的按鈕
+    document.addEventListener('click', (e)=>{
+      const el = e.target.closest('[data-need-consent]');
+      if(!el) return;
+      const url = el.getAttribute('data-href') || el.getAttribute('href');
+      if(!url) return;
+      if(hasAccepted()){
+        // 已同意就直接導向
+        window.location.href = url;
+        return;
+      }
+      e.preventDefault();
+      openModal(url);
+    }, true); // 捕獲階段，避免被其他 listener 攔走
 
     agreeBtn.addEventListener('click', ()=>{
       if(checkbox.checked && pendingUrl){
         localStorage.setItem(STORAGE_KEY,'yes');
-        const url = pendingUrl; // 先存再跳，避免 race condition
+        const url = pendingUrl;
         pendingUrl = null;
         closeModal();
         window.location.href = url;
