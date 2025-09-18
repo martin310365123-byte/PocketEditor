@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+- name: 回報安全性漏洞（私密信箱）
+url: mailto:support@pocketeditor.app
+about: 請勿公開張貼零時差漏洞，改用此信箱私下通報
