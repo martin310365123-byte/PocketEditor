@@ -72,6 +72,83 @@
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"PocketEditor","operatingSystem":"Windows","applicationCategory":"MultimediaApplication","offers":{"@type":"Offer","priceCurrency":"TWD","price":"0"},"description":"AI 自動剪輯工具，去無聲段、字幕自動生成與硬燒、隨機 BGM、合成。支援中文。"}
   </script>
 </head>
+  <script>
+  // === 同意書：永遠每次都詢問（方案A 最保險版） ===
+  const EULA_VERSION = '2025-09-18';
+  const needConsentRegex = /\/releases\/|\.exe$|\.msi$|\.zip$/i;
+
+  // 元件
+  const modal = document.getElementById('consent-modal');
+  const agreeBtn = document.getElementById('consent-agree');
+  const cancelBtn = document.getElementById('consent-cancel');
+  const closeX = document.getElementById('consent-close');
+  const checkbox = document.getElementById('consent-check');
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  // 這行是關鍵：永遠視為「尚未同意」
+  const hasAccepted = () => false;
+
+  let pendingUrl = null;
+  let pendingNewTab = false;
+
+  function openModal(url, openInNewTab){
+    pendingUrl = url;
+    pendingNewTab = !!openInNewTab;
+    checkbox.checked = false;
+    agreeBtn.disabled = true;
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden','false');
+  }
+  function closeModal(){
+    modal.classList.remove('show');
+    modal.setAttribute('aria-hidden','true');
+  }
+  function revokeIfPending(){
+    pendingUrl = null;
+    pendingNewTab = false;
+    closeModal();
+  }
+
+  checkbox.addEventListener('change', ()=>{ agreeBtn.disabled = !checkbox.checked; });
+  cancelBtn.addEventListener('click', revokeIfPending);
+  closeX.addEventListener('click', revokeIfPending);
+  modal.addEventListener('click', (e)=>{ if(e.target === modal) revokeIfPending(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') revokeIfPending(); });
+
+  // 捕獲階段攔截所有下載連結（<a>）與需要同意的按鈕
+  document.addEventListener('click', (e)=>{
+    const a = e.target.closest('a');
+    if (a) {
+      const href = a.getAttribute('href') || '';
+      const explicit = a.hasAttribute('data-need-consent');
+      const need = explicit || needConsentRegex.test(href);
+      if (need) {
+        e.preventDefault(); e.stopPropagation();
+        const openInNewTab = e.metaKey || e.ctrlKey || a.target === '_blank';
+        openModal(href, openInNewTab);
+        return;
+      }
+    }
+    const btn = e.target.closest('button[data-need-consent]');
+    if (btn) {
+      const url = btn.getAttribute('data-href') || '';
+      if (!url) return;
+      e.preventDefault(); e.stopPropagation();
+      openModal(url, false);
+    }
+  }, true);
+
+  // 同意後才導向；不寫任何 localStorage → 下一次仍會再問
+  agreeBtn.addEventListener('click', ()=>{
+    if(checkbox.checked && pendingUrl){
+      const url = pendingUrl;
+      const openInNewTab = pendingNewTab;
+      pendingUrl = null; pendingNewTab = false;
+      closeModal();
+      if (openInNewTab) window.open(url, '_blank'); else window.location.href = url;
+    }
+  });
+</script>
 <body>
   <div class="container">
     <header>
