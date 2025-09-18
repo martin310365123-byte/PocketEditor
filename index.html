@@ -239,10 +239,10 @@
   </div>
 
   <script>
-    // 替換年份
+    // 年份
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // === 安裝同意書（前端 gating，使用者仍可直接造訪 Releases 連結。強制同意請在安裝程式內加入 Clickwrap） ===
+    // === 安裝同意書（前端 gating） ===
     const EULA_VERSION = '2025-09-18'; // 當 eula.html 有重大更新時請同步修改
     const STORAGE_KEY = `pe_eula_accept_${EULA_VERSION}`;
 
@@ -267,15 +267,17 @@
     checkbox.addEventListener('change', ()=>{
       agreeBtn.disabled = !checkbox.checked;
     });
-    cancelBtn.addEventListener('click', closeModal);
-    closeX.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
-    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+    cancelBtn.addEventListener('click', ()=>{ pendingUrl=null; closeModal(); });
+    closeX.addEventListener('click', ()=>{ pendingUrl=null; closeModal(); });
+    modal.addEventListener('click', (e)=>{ if(e.target === modal){ pendingUrl=null; closeModal(); }});
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ pendingUrl=null; closeModal(); }});
 
     function attachConsent(anchor){
+      // 避免重複綁定
+      if (anchor.dataset.consentBound) return;
+      anchor.dataset.consentBound = '1';
       anchor.addEventListener('click', (e)=>{
-        // 已同意則直接放行
-        if(localStorage.getItem(STORAGE_KEY) === 'yes') return;
+        if(localStorage.getItem(STORAGE_KEY) === 'yes') return; // 已同意直接放行
         e.preventDefault();
         const url = anchor.getAttribute('href');
         openModal(url);
