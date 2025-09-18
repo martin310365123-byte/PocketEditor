@@ -23,7 +23,7 @@
     header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
     .logo{display:flex;align-items:center;gap:12px}
     .logo-badge{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--acc),#33d6a6);box-shadow:0 6px 18px rgba(139,229,139,.35)}
-    nav a{margin-left:20px;opacity:.9}
+    nav a, nav button{margin-left:20px;opacity:.9}
     .btn{display:inline-block;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,var(--acc2),#6fe3ff);color:#0b1220;font-weight:700;box-shadow:0 8px 20px rgba(111,227,255,.25);border:1px solid rgba(255,255,255,.08);cursor:pointer}
     .btn.secondary{background:#1a2233;color:var(--text);border:1px solid #2b3550}
     .btn[disabled]{opacity:.55;cursor:not-allowed}
@@ -84,8 +84,8 @@
         <a href="#how">使用方式</a>
         <a href="#pricing">方案</a>
         <a href="#faq">常見問題</a>
-        <!-- 超兇：改成 button，下載導向交給 JS -->
-        <button class="btn" id="download" type="button" data-href="https://github.com/martin310365123-byte/PocketEditor/releases/latest" data-need-consent>下載</button>
+        <!-- 核爆：保持為 <a>，但用事件委派攔截，並加 data-need-consent 作為顯式標記 -->
+        <a class="btn" id="download" href="https://github.com/martin310365123-byte/PocketEditor/releases/latest" data-need-consent>下載</a>
       </nav>
     </header>
 
@@ -100,8 +100,7 @@
           <span class="badge">支援繁中字幕</span>
         </div>
         <div class="cta">
-          <!-- 超兇：這顆也改成 button -->
-          <button class="btn" id="download-hero" type="button" data-href="https://github.com/martin310365123-byte/PocketEditor/releases/latest" data-need-consent>下載封測版</button>
+          <a class="btn" id="download-hero" href="https://github.com/martin310365123-byte/PocketEditor/releases/latest" data-need-consent>下載封測版</a>
           <a class="btn secondary" href="https://github.com/martin310365123-byte/PocketEditor/issues/new/choose">回報問題 / 提案</a>
         </div>
         <p class="muted" style="margin-top:8px">目前以 <strong>PocketEditor v4.x</strong> 為核心（字幕流暢優化、剪輯與 BGM 正常），之後將新增 GUI 與雲端部署。</p>
@@ -244,7 +243,7 @@
     // 年份
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // === 安裝同意書（超兇版：button 強制 + 事件委派） ===
+    // === 安裝同意書（核爆版：捕獲攔截所有下載連結） ===
     const EULA_VERSION = '2025-09-18'; // 當 eula.html 有重大更新時請同步修改
     const STORAGE_KEY = `pe_eula_accept_${EULA_VERSION}`;
 
@@ -255,11 +254,14 @@
     const checkbox = document.getElementById('consent-check');
 
     let pendingUrl = null;
+    let pendingNewTab = false;
 
-    function hasAccepted(){ return localStorage.getItem(STORAGE_KEY) === 'yes'; }
+    const needConsentRegex = /\/releases\/|\.exe$|\.msi$|\.zip$/i;
+    const hasAccepted = () => localStorage.getItem(STORAGE_KEY) === 'yes';
 
-    function openModal(url){
+    function openModal(url, openInNewTab){
       pendingUrl = url;
+      pendingNewTab = !!openInNewTab;
       checkbox.checked = false;
       agreeBtn.disabled = true;
       modal.classList.add('show');
@@ -272,6 +274,7 @@
     function revokeIfPending(){
       if(!hasAccepted()) localStorage.removeItem(STORAGE_KEY);
       pendingUrl = null;
+      pendingNewTab = false;
       closeModal();
     }
 
@@ -283,28 +286,45 @@
     modal.addEventListener('click', (e)=>{ if(e.target === modal) revokeIfPending(); });
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') revokeIfPending(); });
 
-    // 事件委派：攔所有帶 data-need-consent 的按鈕
+    // 捕獲階段攔截：所有 <a> 以及標記 data-need-consent 的元素
     document.addEventListener('click', (e)=>{
-      const el = e.target.closest('[data-need-consent]');
-      if(!el) return;
-      const url = el.getAttribute('data-href') || el.getAttribute('href');
-      if(!url) return;
-      if(hasAccepted()){
-        // 已同意就直接導向
-        window.location.href = url;
-        return;
+      // 1) 先抓 <a>
+      const a = e.target.closest('a');
+      if (a) {
+        const href = a.getAttribute('href') || '';
+        const explicit = a.hasAttribute('data-need-consent');
+        const need = explicit || needConsentRegex.test(href);
+        if (need) {
+          if (hasAccepted()) return; // 已同意 → 放行（保留原本開新分頁行為）
+          e.preventDefault();
+          e.stopPropagation();
+          const openInNewTab = e.metaKey || e.ctrlKey || a.target === '_blank';
+          openModal(href, openInNewTab);
+          return;
+        }
       }
-      e.preventDefault();
-      openModal(url);
-    }, true); // 捕獲階段，避免被其他 listener 攔走
+      // 2) 再抓 button[data-need-consent]
+      const btn = e.target.closest('button[data-need-consent]');
+      if (btn) {
+        const url = btn.getAttribute('data-href') || '';
+        if (!url) return;
+        if (hasAccepted()) { window.location.href = url; return; }
+        e.preventDefault();
+        e.stopPropagation();
+        openModal(url, false);
+      }
+    }, true); // 用捕獲階段，避免被其他 listener 先處理
 
     agreeBtn.addEventListener('click', ()=>{
       if(checkbox.checked && pendingUrl){
         localStorage.setItem(STORAGE_KEY,'yes');
         const url = pendingUrl;
+        const openInNewTab = pendingNewTab;
         pendingUrl = null;
+        pendingNewTab = false;
         closeModal();
-        window.location.href = url;
+        if (openInNewTab) window.open(url, '_blank');
+        else window.location.href = url;
       }
     });
   </script>
