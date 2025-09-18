@@ -282,11 +282,9 @@
       });
     }
 
-    // 自動對所有可能的下載連結套同意書（含 /releases/、.exe、.msi、.zip）
+    // 自動對所有下載連結套同意書（/releases/、.exe、.msi、.zip）
     const downloadLinkSelector = 'a[href*="/releases/"], a[href$=".exe"], a[href$=".msi"], a[href$=".zip"]';
     document.querySelectorAll(downloadLinkSelector).forEach(attachConsent);
-    if(dl1) attachConsent(dl1);
-    if(dl2) attachConsent(dl2);
 
     agreeBtn.addEventListener('click', ()=>{
       if(checkbox.checked && pendingUrl){
