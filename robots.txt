@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://martin310365123-byte.github.io/PocketEditor/sitemap.xml
