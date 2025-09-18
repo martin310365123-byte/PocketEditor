@@ -24,7 +24,7 @@
     .logo{display:flex;align-items:center;gap:12px}
     .logo-badge{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--acc),#33d6a6);box-shadow:0 6px 18px rgba(139,229,139,.35)}
     nav a{margin-left:20px;opacity:.9}
-    .btn, .btn-like{display:inline-block;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,var(--acc2),#6fe3ff);color:#0b1220;font-weight:700;box-shadow:0 8px 20px rgba(111,227,255,.25);border:1px solid rgba(255,255,255,.08);cursor:pointer}
+    .btn{display:inline-block;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,var(--acc2),#6fe3ff);color:#0b1220;font-weight:700;box-shadow:0 8px 20px rgba(111,227,255,.25);border:1px solid rgba(255,255,255,.08)}
     .btn.secondary{background:#1a2233;color:var(--text);border:1px solid #2b3550}
     .btn[disabled]{opacity:.55;cursor:not-allowed}
     .hero{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:center;margin-top:24px}
@@ -84,8 +84,8 @@
         <a href="#how">使用方式</a>
         <a href="#pricing">方案</a>
         <a href="#faq">常見問題</a>
-        <!-- Edge 兼容：改成 button，完全由 JS 控制導向 -->
-        <button class="btn-like" id="download" type="button" data-href="https://github.com/martin310365123-byte/PocketEditor/releases/latest" data-need-consent>下載</button>
+        <!-- 原本就是 <a>：本版 JS 會在載入後自動把 href 轉成 data-href 以攔截 Edge 導向 -->
+        <a class="btn" id="download" href="https://github.com/martin310365123-byte/PocketEditor/releases/latest" data-need-consent>下載</a>
       </nav>
     </header>
 
@@ -100,7 +100,7 @@
           <span class="badge">支援繁中字幕</span>
         </div>
         <div class="cta">
-          <button class="btn" id="download-hero" type="button" data-href="https://github.com/martin310365123-byte/PocketEditor/releases/latest" data-need-consent>下載封測版</button>
+          <a class="btn" id="download-hero" href="https://github.com/martin310365123-byte/PocketEditor/releases/latest" data-need-consent>下載封測版</a>
           <a class="btn secondary" href="https://github.com/martin310365123-byte/PocketEditor/issues/new/choose">回報問題 / 提案</a>
         </div>
         <p class="muted" style="margin-top:8px">目前以 <strong>PocketEditor v4.x</strong> 為核心（字幕流暢優化、剪輯與 BGM 正常），之後將新增 GUI 與雲端部署。</p>
@@ -235,66 +235,84 @@
         <button class="btn secondary" id="consent-cancel">不同意</button>
         <button class="btn" id="consent-agree" disabled>同意並下載</button>
       </div>
-      <p class="muted" style="margin-top:6px">此同意不會被記錄，您每次下載都會再次看到本提示（Edge 兼容版）。</p>
+      <p class="muted" style="margin-top:6px">（Edge 終極版）此同意不會被記錄，每次下載都會再次看到本提示。</p>
     </div>
   </div>
 
   <script>
+    // === CONSENT_OBSERVER_ACTIVE：Edge 終極版｜每次詢問 ===
     document.getElementById('y').textContent = new Date().getFullYear();
+    const MARK = 'CONSENT_OBSERVER_ACTIVE'; console.log(MARK);
 
-    // === Edge 兼容：pointerdown + click 雙攔截，且下載按鈕為 <button>（無 href） ===
     const modal = document.getElementById('consent-modal');
     const agreeBtn = document.getElementById('consent-agree');
     const cancelBtn = document.getElementById('consent-cancel');
     const closeX = document.getElementById('consent-close');
     const checkbox = document.getElementById('consent-check');
 
-    let pendingUrl = null;
+    let pendingUrl = null; let pendingNewTab = false;
 
-    function openModal(url){
-      pendingUrl = url;
-      checkbox.checked = false;
-      agreeBtn.disabled = true;
-      modal.classList.add('show');
-      modal.setAttribute('aria-hidden','false');
+    const needConsentRegex = /\/releases\/|\.exe$|\.msi$|\.zip$/i;
+
+    const hasAccepted = () => false; // 永遠每次詢問
+
+    function openModal(url, openInNewTab){
+      pendingUrl = url; pendingNewTab = !!openInNewTab;
+      checkbox.checked = false; agreeBtn.disabled = true;
+      modal.classList.add('show'); modal.setAttribute('aria-hidden','false');
     }
-    function closeModal(){
-      modal.classList.remove('show');
-      modal.setAttribute('aria-hidden','true');
-    }
+    function closeModal(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); }
 
     checkbox.addEventListener('change', ()=>{ agreeBtn.disabled = !checkbox.checked; });
-    cancelBtn.addEventListener('click', ()=>{ pendingUrl = null; closeModal(); });
-    closeX.addEventListener('click', ()=>{ pendingUrl = null; closeModal(); });
-    modal.addEventListener('click', (e)=>{ if(e.target === modal){ pendingUrl = null; closeModal(); } });
-    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ pendingUrl = null; closeModal(); } });
+    cancelBtn.addEventListener('click', ()=>{ pendingUrl=null; pendingNewTab=false; closeModal(); });
+    closeX.addEventListener('click', ()=>{ pendingUrl=null; pendingNewTab=false; closeModal(); });
+    modal.addEventListener('click', (e)=>{ if(e.target===modal){ pendingUrl=null; pendingNewTab=false; closeModal(); } });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ pendingUrl=null; pendingNewTab=false; closeModal(); } });
 
-    function isConsentTarget(el){ return el && el.matches('[data-need-consent]'); }
+    // 將符合條件的 a 轉為受控：把 href → data-href 並移除 href，避免 Edge 直接導向
+    function normalizeAndBind(el){
+      if(!el || el.dataset.consentBound==='1') return;
+      const tag = el.tagName.toLowerCase();
+      let url = el.getAttribute('data-href') || el.getAttribute('href') || '';
+      if(!url) return;
+      const explicit = el.hasAttribute('data-need-consent');
+      const need = explicit || needConsentRegex.test(url);
+      if(!need) return;
 
-    // 先用 pointerdown 攔截（Edge 在某些情況下 click 可能被其他 handler 抢先）
-    document.addEventListener('pointerdown', (e)=>{
-      const target = e.target.closest('[data-need-consent]');
-      if(!isConsentTarget(target)) return;
-      e.preventDefault();
-      const url = target.getAttribute('data-href');
-      if(url) openModal(url);
-    }, true);
-
-    // click 作為後備
-    document.addEventListener('click', (e)=>{
-      const target = e.target.closest('[data-need-consent]');
-      if(!isConsentTarget(target)) return;
-      e.preventDefault();
-      if(!pendingUrl){
-        const url = target.getAttribute('data-href');
-        if(url) openModal(url);
+      // 移除原生導向能力
+      el.setAttribute('data-href', url);
+      if(tag==='a'){
+        el.removeAttribute('href'); // 關鍵：Edge 就不會自動導向
+        el.setAttribute('role','button');
+        el.setAttribute('tabindex','0');
       }
-    }, true);
 
+      function handler(openInNewTab){ openModal(url, !!openInNewTab); }
+
+      el.addEventListener('pointerdown', (e)=>{ e.preventDefault(); }, true);
+      el.addEventListener('click', (e)=>{ e.preventDefault(); handler(e.metaKey||e.ctrlKey); }, true);
+      el.addEventListener('auxclick', (e)=>{ if(e.button===1){ e.preventDefault(); handler(true); } }, true);
+      el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); handler(false); } }, true);
+
+      el.dataset.consentBound='1';
+    }
+
+    function scan(){
+      const nodes = document.querySelectorAll('a,button');
+      nodes.forEach(normalizeAndBind);
+    }
+
+    // 初始掃描 + 監聽 DOM 變化（防止日後新增節點漏網）
+    scan();
+    const observer = new MutationObserver(()=>{ scan(); });
+    observer.observe(document.body, { childList:true, subtree:true, attributes:true, attributeFilter:['href','data-href'] });
+
+    // 同意 → 導向；不記錄任何狀態 → 每次都會再詢問
     agreeBtn.addEventListener('click', ()=>{
       if(checkbox.checked && pendingUrl){
-        const url = pendingUrl; pendingUrl = null; closeModal();
-        window.location.href = url;
+        const url = pendingUrl; const openInNewTab = pendingNewTab;
+        pendingUrl=null; pendingNewTab=false; closeModal();
+        if(openInNewTab) window.open(url, '_blank'); else window.location.assign(url);
       }
     });
   </script>
