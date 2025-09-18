@@ -1,99 +1,58 @@
 <!doctype html>
-<html lang="zh-Hant-TW">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PocketEditor — 最終用戶授權合約（EULA）</title>
-  <meta name="description" content="PocketEditor EULA：授權範圍、限制、所有權、開源元件、保固免責、責任限制、終止與準據法。" />
-  <link rel="icon" href="./favicon.ico" />
-  <style>
-    :root{--bg:#0b0d12;--card:#10131a;--muted:#b7c0d1;--text:#e8edf7;--acc:#8bb3ff;--bd:#1d2330;--radius:16px}
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","Microsoft JhengHei UI","PingFang TC",sans-serif}
-    .container{max-width:960px;margin:0 auto;padding:28px}
-    a{color:var(--acc);text-decoration:none}
-    a:hover{text-decoration:underline}
-    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--bd);border-radius:var(--radius);padding:22px}
-    h1{margin:8px 0 4px}
-    h2{margin-top:28px}
-    .muted{color:var(--muted)}
-    ul{line-height:1.7}
-    code{background:#0f1420;border:1px solid #1f2740;padding:2px 6px;border-radius:8px}
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <div><a href="index.html">← 返回首頁</a></div>
-      <strong>PocketEditor</strong>
-    </header>
+</p>
+<p>
+<button class="btn" id="btn-del-one">刪除此 Key</button>
+</p>
 
-    <div class="card">
-      <h1>最終用戶授權合約（EULA）</h1>
-      <div class="muted">最後更新：2025-09-18</div>
-      <p><strong>重要：</strong>在安裝、複製或使用 <strong>PocketEditor</strong>（以下稱「本軟體」）之前，請先閱讀本合約。安裝或使用即表示您同意受其拘束。若您不同意，請勿安裝或使用本軟體。</p>
 
-      <h2>1. 授權授與</h2>
-      <ul>
-        <li>我們授與您一個<strong>非專屬、不可轉讓、可撤銷</strong>之授權，於單一使用者裝置上安裝與使用本軟體。</li>
-        <li>在遵守本合約與適用法之前提下，您可使用本軟體處理、製作與發佈您的影音內容（輸出成果之權利歸屬於您，惟仍須遵守第三方權利與法令）。</li>
-        <li>本授權不賦予您對本軟體之任何所有權或智慧財產權。</li>
-      </ul>
+<p class="muted">小提示：日後若你更新 <code>EULA_VERSION</code>，新版本會自動再次詢問使用者同意；本頁只是方便你或客服在需要時手動重置。</p>
+</div>
+</div>
 
-      <h2>2. 使用限制</h2>
-      <ul>
-        <li>不得對本軟體進行逆向工程、反編譯、反組譯，除非適用法明確允許且僅在其範圍內。</li>
-        <li>不得轉售、出租、出借、轉授權或以任何方式散布本軟體。</li>
-        <li>不得移除或變更任何權利聲明、商標或授權標示。</li>
-        <li>不得以違法、侵權或有害之方式使用本軟體。</li>
-      </ul>
 
-      <h2>3. 試用 / Beta 條款</h2>
-      <ul>
-        <li>若本軟體以「封測」或「測試版」提供，功能可能變更、暫停或終止，並可能包含錯誤或不完整之功能。</li>
-        <li>請自行備份資料與素材。我們對於由於測試版缺陷所導致之資料遺失或損害不承擔責任。</li>
-        <li>本軟體預設不包含遙測；若未來需收集匿名使用資訊，我們將依隱私權政策說明並取得您的同意。</li>
-      </ul>
+<script>
+const LIST = document.getElementById('key-list');
+const PREFIX = 'pe_eula_accept_';
 
-      <h2>4. 開源元件與第三方服務</h2>
-      <p>本軟體包含或相依若干開源元件（例如 FFmpeg、MoviePy、OpenAI Whisper 等）。該等元件依其各自之授權條款提供，並可能賦予您額外權利；如本合約與第三方授權條款有衝突，以第三方授權條款為準。第三方服務（例如 GitHub Releases 下載）亦受其服務條款與隱私政策拘束。</p>
 
-      <h2>5. 智慧財產權</h2>
-      <p>本軟體及其所有複本、改良與衍生著作之所有權、著作權與其他智慧財產權，均屬於我們或其授權人所有。除本合約明示授權外，未授與任何默示授權。</p>
+function refresh(){
+LIST.innerHTML = '';
+const keys = Object.keys(localStorage).filter(k => k.startsWith(PREFIX));
+if(keys.length === 0){
+LIST.innerHTML = '<li class="muted">（沒有找到任何 '+PREFIX+'* 的 key）</li>';
+return;
+}
+keys.forEach(k => {
+const li = document.createElement('li');
+li.innerHTML = `<code>${k}</code> = <code>${localStorage.getItem(k)}</code> `;
+const btn = document.createElement('button');
+btn.className = 'btn';
+btn.textContent = '刪除';
+btn.onclick = () => { localStorage.removeItem(k); refresh(); alert('已刪除 '+k); };
+li.append(' ', btn);
+LIST.appendChild(li);
+});
+}
 
-      <h2>6. 使用者內容</h2>
-      <p>您保留您素材與輸出結果之所有權。您應確保對所使用之素材具有必要之權利與授權，並自行負責遵守第三方授權、肖像權、隱私權與適用法令。</p>
 
-      <h2>7. 更新與支援</h2>
-      <p>我們可能不定期提供更新、修補或新版本。除非另有書面約定，更新不保證相容性或持續提供。技術支援依實際資源與政策提供。</p>
+document.getElementById('btn-reset-all').onclick = () => {
+const keys = Object.keys(localStorage).filter(k => k.startsWith(PREFIX));
+keys.forEach(k => localStorage.removeItem(k));
+refresh();
+alert('已刪除所有 '+PREFIX+'* 的同意紀錄。');
+};
 
-      <h2>8. 免責與無保固</h2>
-      <p>本軟體係以 <strong>「現狀」</strong>（AS IS）與 <strong>「可用時」</strong>（AS AVAILABLE）提供，不附任何明示或默示之保固，包括但不限於適售性、特定目的適用性與不侵權之保證。</p>
 
-      <h2>9. 責任限制</h2>
-      <p>在法律允許的最大範圍內，我們對任何間接、附帶、特別、懲罰性或衍生性損害不負責，包括但不限於利潤損失、資料遺失或商業中斷。對於任何直接損害，我們的總責任以您於前 12 個月就本軟體實際支付之費用為上限；若您無需支付費用，該上限為新臺幣 1,000 元。</p>
+document.getElementById('btn-del-one').onclick = () => {
+const key = document.getElementById('key-input').value.trim();
+if(!key){ alert('請輸入要刪除的 Key'); return; }
+localStorage.removeItem(key);
+refresh();
+alert('已刪除：'+key);
+};
 
-      <h2>10. 終止</h2>
-      <p>若您違反本合約，我們得終止授權且無需另行通知。終止後，您應停止使用並刪除所有本軟體複本。本合約中依其性質應繼續有效之條款（例如智慧財產權、免責、責任限制等）於終止後仍然有效。</p>
 
-      <h2>11. 出口管制與制裁</h2>
-      <p>您同意遵守所有適用之出口管制、再出口與經濟制裁法規。您不得在相關法規禁止之地區、實體或個人使用或轉讓本軟體。</p>
-
-      <h2>12. 準據法與管轄</h2>
-      <p>本合約受 <strong>中華民國（臺灣）</strong> 法律管轄並依其解釋；如有爭議，以臺灣臺北地方法院為第一審管轄法院。若您係消費者，且適用法另為強制規定者，從其規定。</p>
-
-      <h2>13. 一般條款</h2>
-      <ul>
-        <li>本合約構成您與我們就本軟體之完整協議，並取代先前之任何口頭或書面約定。</li>
-        <li>若本合約任何條款被認定無效，其餘條款仍具完全效力。</li>
-        <li>未行使或延遲行使任何權利，不構成權利之拋棄。</li>
-        <li>未經我們書面同意，您不得轉讓本合約或其任何權利義務。</li>
-      </ul>
-
-      <h2>14. 聯絡我們</h2>
-      <p>關於本合約之問題，請來信：<a href="mailto:support@pocketeditor.app">support@pocketeditor.app</a>（可改為您的正式信箱）。</p>
-    </div>
-  </div>
+refresh();
+</script>
 </body>
 </html>
