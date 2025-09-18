@@ -1,4 +1,17 @@
 // CONSENT_OBSERVER_ACTIVE
+const hasAccepted = () => false; // 永遠每次詢問（不記錄同意）
+
+
+function openModal(url, openInNewTab){
+pendingUrl = url; pendingNewTab = !!openInNewTab;
+checkbox.checked = false; agreeBtn.disabled = true;
+modal.style.display = 'flex'; // 先保證顯示，再加 class
+modal.classList.add('show'); modal.setAttribute('aria-hidden','false');
+}
+function closeModal(){
+modal.classList.remove('show'); modal.setAttribute('aria-hidden','true');
+modal.style.display = 'none';
+}
 
 
 checkbox.addEventListener('change', ()=>{ agreeBtn.disabled = !checkbox.checked; });
@@ -51,9 +64,7 @@ el.dataset.consentBound='1';
 }
 
 
-function scanAll(){
-document.querySelectorAll('a,button').forEach(bind);
-}
+function scanAll(){ document.querySelectorAll('a,button').forEach(bind); }
 
 
 // 初始掃描 + 監聽 DOM 變更（防新增節點漏網）
