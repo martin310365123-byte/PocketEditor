@@ -254,8 +254,13 @@
 
     let pendingUrl = null;
 
+    function hasAccepted(){ return localStorage.getItem(STORAGE_KEY) === 'yes'; }
+
     function openModal(url){
       pendingUrl = url;
+      // 確保每次打開都是全新狀態
+      checkbox.checked = false;
+      agreeBtn.disabled = true;
       modal.classList.add('show');
       modal.setAttribute('aria-hidden','false');
     }
@@ -263,21 +268,26 @@
       modal.classList.remove('show');
       modal.setAttribute('aria-hidden','true');
     }
+    function revokeIfPending(){
+      // 使用者選擇不同意：確保沒有殘留的同意紀錄
+      if(!hasAccepted()) localStorage.removeItem(STORAGE_KEY);
+      pendingUrl = null;
+      closeModal();
+    }
 
     checkbox.addEventListener('change', ()=>{
       agreeBtn.disabled = !checkbox.checked;
     });
-    cancelBtn.addEventListener('click', ()=>{ pendingUrl=null; closeModal(); });
-    closeX.addEventListener('click', ()=>{ pendingUrl=null; closeModal(); });
-    modal.addEventListener('click', (e)=>{ if(e.target === modal){ pendingUrl=null; closeModal(); }});
-    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ pendingUrl=null; closeModal(); }});
+    cancelBtn.addEventListener('click', revokeIfPending);
+    closeX.addEventListener('click', revokeIfPending);
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) revokeIfPending(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') revokeIfPending(); });
 
     function attachConsent(anchor){
-      // 避免重複綁定
-      if (anchor.dataset.consentBound) return;
+      if (anchor.dataset.consentBound) return; // 避免重複綁定
       anchor.dataset.consentBound = '1';
       anchor.addEventListener('click', (e)=>{
-        if(localStorage.getItem(STORAGE_KEY) === 'yes') return; // 已同意直接放行
+        if(hasAccepted()) return; // 已同意直接放行
         e.preventDefault();
         const url = anchor.getAttribute('href');
         openModal(url);
@@ -291,8 +301,10 @@
     agreeBtn.addEventListener('click', ()=>{
       if(checkbox.checked && pendingUrl){
         localStorage.setItem(STORAGE_KEY,'yes');
-        window.location.href = pendingUrl;
+        const url = pendingUrl; // 儲存後立即導向
+        pendingUrl = null;
         closeModal();
+        window.location.href = url;
       }
     });
   </script>
