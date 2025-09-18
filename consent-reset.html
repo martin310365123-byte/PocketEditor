@@ -1,0 +1,70 @@
+<!doctype html>
+<h2>快速重置</h2>
+<p>按下一鍵重置，會刪除本網域下所有 <code>pe_eula_accept_*</code> 開頭的同意紀錄。</p>
+<p><button class="btn" id="btn-reset-all">撤回本機同意（全部版本）</button></p>
+
+
+<h2>目前偵測到的同意 Key</h2>
+<ul id="key-list"></ul>
+
+
+<h2>手動刪除指定 Key</h2>
+<p>
+<input type="text" id="key-input" placeholder="輸入 localStorage Key，例如：pe_eula_accept_2025-09-18" />
+</p>
+<p>
+<button class="btn" id="btn-del-one">刪除此 Key</button>
+</p>
+
+
+<p class="muted">小提示：日後若你更新 <code>EULA_VERSION</code>，新版本會自動再次詢問使用者同意；本頁只是方便你或客服在需要時手動重置。</p>
+</div>
+</div>
+
+
+<script>
+const LIST = document.getElementById('key-list');
+const PREFIX = 'pe_eula_accept_';
+
+
+function refresh(){
+LIST.innerHTML = '';
+const keys = Object.keys(localStorage).filter(k => k.startsWith(PREFIX));
+if(keys.length === 0){
+LIST.innerHTML = '<li class="muted">（沒有找到任何 '+PREFIX+'* 的 key）</li>';
+return;
+}
+keys.forEach(k => {
+const li = document.createElement('li');
+li.innerHTML = `<code>${k}</code> = <code>${localStorage.getItem(k)}</code> `;
+const btn = document.createElement('button');
+btn.className = 'btn';
+btn.textContent = '刪除';
+btn.onclick = () => { localStorage.removeItem(k); refresh(); alert('已刪除 '+k); };
+li.append(' ', btn);
+LIST.appendChild(li);
+});
+}
+
+
+document.getElementById('btn-reset-all').onclick = () => {
+const keys = Object.keys(localStorage).filter(k => k.startsWith(PREFIX));
+keys.forEach(k => localStorage.removeItem(k));
+refresh();
+alert('已刪除所有 '+PREFIX+'* 的同意紀錄。');
+};
+
+
+document.getElementById('btn-del-one').onclick = () => {
+const key = document.getElementById('key-input').value.trim();
+if(!key){ alert('請輸入要刪除的 Key'); return; }
+localStorage.removeItem(key);
+refresh();
+alert('已刪除：'+key);
+};
+
+
+refresh();
+</script>
+</body>
+</html>
