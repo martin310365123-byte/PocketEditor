@@ -10,22 +10,18 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="PocketEditor — AI 自動剪輯工具" />
   <meta property="og:description" content="去無聲段、字幕、BGM、合成，一鍵搞定。支援中文工作流程。" />
-  <meta property="og:image" content="https://example.com/og-image.jpg" />
+  <meta property="og:image" content="assets/og-image.jpg" />
   <meta property="og:locale" content="zh_TW" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Favicon (請日後替換) -->
-  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" href="./favicon.ico" />
 
-  <!-- Base CSS：純手寫，無外部依賴 -->
   <style>
-    :root{
-      --bg:#0b0d12;--card:#10131a;--muted:#b7c0d1;--text:#e8edf7;--acc:#8be58b;--acc2:#8bb3ff;--bd:#1d2330;
-      --radius:16px;--shadow:0 10px 30px rgba(0,0,0,.25);
-    }
+    :root{--bg:#0b0d12;--card:#10131a;--muted:#b7c0d1;--text:#e8edf7;--acc:#8be58b;--acc2:#8bb3ff;--bd:#1d2330;--radius:16px;--shadow:0 10px 30px rgba(0,0,0,.25)}
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","Microsoft JhengHei UI","PingFang TC",sans-serif;background:radial-gradient(1200px 600px at 20% -10%,#162034,transparent),radial-gradient(1000px 500px at 120% 10%,#19223a,transparent),var(--bg);color:var(--text);}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","Microsoft JhengHei UI","PingFang TC",sans-serif;background:radial-gradient(1200px 600px at 20% -10%,#162034,transparent),radial-gradient(1000px 500px at 120% 10%,#19223a,transparent),var(--bg);color:var(--text)}
     a{color:var(--acc2);text-decoration:none}
     a:hover{text-decoration:underline}
     .container{max-width:1140px;margin:0 auto;padding:28px}
@@ -35,7 +31,6 @@
     nav a{margin-left:20px;opacity:.9}
     .btn{display:inline-block;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,var(--acc2),#6fe3ff);color:#0b1220;font-weight:700;box-shadow:0 8px 20px rgba(111,227,255,.25);border:1px solid rgba(255,255,255,.08)}
     .btn.secondary{background:#1a2233;color:var(--text);border:1px solid #2b3550}
-
     .hero{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:center;margin-top:24px}
     .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--bd);border-radius:var(--radius);box-shadow:var(--shadow)}
     .hero .copy{padding:36px}
@@ -43,48 +38,31 @@
     p.lead{font-size:18px;color:var(--muted);margin:0 0 22px}
     .badges{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 22px}
     .badge{padding:6px 10px;border:1px solid #2b3550;border-radius:999px;font-size:13px;color:#cfe0ff;background:#151c2a}
-
     .hero .mock{padding:24px}
     .mockbox{border-radius:18px;background:#0c111b;border:1px solid #232b3d;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03),0 10px 30px rgba(0,0,0,.35);padding:18px}
     .windowbar{display:flex;gap:8px;margin-bottom:10px}
     .dot{width:10px;height:10px;border-radius:50%;background:#2f3a53}
     pre{margin:0;white-space:pre-wrap;word-break:break-word;font-size:13.5px;line-height:1.55;color:#c9d7ff}
-
     .sections{display:grid;gap:18px;margin-top:28px}
     .section{padding:28px}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .feat{padding:18px;border:1px solid var(--bd);border-radius:14px;background:#0f1420}
     .feat h3{margin:0 0 6px;font-size:18px}
     .feat p{margin:0;color:var(--muted)}
-
     .how{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
     .step{padding:18px;border:1px dashed #2b3550;border-radius:14px}
-
     .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
-
     .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .price-card{padding:22px;border:1px solid var(--bd);border-radius:16px;background:#0f1420}
     .price-card h4{margin:0 0 8px}
     .price{font-size:28px;font-weight:800;margin:8px 0}
     .muted{color:var(--muted)}
-
     .faq dt{font-weight:700;margin:12px 0 6px}
     .faq dd{margin:0 0 10px;color:var(--muted)}
-
     footer{margin:40px 0 20px;color:#9db0d0;font-size:13px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
     footer nav a{margin:0 12px 0 0}
-
-    @media (max-width:1000px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr 1fr}
-      .how{grid-template-columns:1fr 1fr}
-      .pricing{grid-template-columns:1fr}
-    }
-    @media (max-width:640px){
-      h1{font-size:34px}
-      .grid{grid-template-columns:1fr}
-      .how{grid-template-columns:1fr}
-    }
+    @media (max-width:1000px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.how{grid-template-columns:1fr 1fr}.pricing{grid-template-columns:1fr}}
+    @media (max-width:640px){h1{font-size:34px}.grid{grid-template-columns:1fr}.how{grid-template-columns:1fr}}
   </style>
 
   <!-- JSON-LD 結構化資料 -->
@@ -95,11 +73,7 @@
     "name": "PocketEditor",
     "operatingSystem": "Windows",
     "applicationCategory": "MultimediaApplication",
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "TWD",
-      "price": "0"
-    },
+    "offers": {"@type": "Offer","priceCurrency": "TWD","price": "0"},
     "description": "AI 自動剪輯工具，去無聲段、字幕自動生成與硬燒、隨機 BGM、合成。支援中文。"
   }
   </script>
@@ -131,7 +105,7 @@
           <span class="badge">支援繁中字幕</span>
         </div>
         <div class="cta">
-          <a class="btn" id="download" href="#">下載封測版</a>
+          <a class="btn" id="download" href="https://github.com/martin310365123-byte/PocketEditor/releases/latest">下載封測版</a>
           <a class="btn secondary" href="#how">查看使用教學</a>
         </div>
         <p class="muted" style="margin-top:8px">目前以 <strong>PocketEditor v4.x</strong> 為核心（字幕流暢優化、剪輯與 BGM 正常），之後將新增 GUI 與雲端部署。</p>
@@ -139,7 +113,7 @@
       <div class="mock card" aria-hidden="true">
         <div class="mockbox">
           <div class="windowbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-<pre>$ smartcut run \
+<pre>$ pocketeditor run \
   --process-all \
   --stt --stt-model small --stt-device cpu --stt-compute int8 \
   --lang zh \
@@ -224,10 +198,17 @@
     </div>
 
     <footer>
-  <nav>
-    <a href="privacy.html">隱私權政策</a>
-    <a href="eula.html">授權/EULA</a>
-    <a href="mailto:hello@smartcut.app">聯絡我們</a>
-  </nav>
-  <div>© <span id="y"></span> PocketEditor</div>
-</footer>
+      <nav>
+        <a href="privacy.html">隱私權政策</a>
+        <a href="eula.html">授權/EULA</a>
+        <a href="mailto:hello@smartcut.app">聯絡我們</a>
+      </nav>
+      <div>© <span id="y"></span> PocketEditor</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
