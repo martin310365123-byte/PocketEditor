@@ -3,10 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PocketEditor — 官方網站（復原版）</title>
-  <meta name="description" content="PocketEditor：Windows 上的 AI 自動剪輯工具。此檔為單檔復原版，內含完整樣式與同意書邏輯。" />
+  <title>PocketEditor — 官方網站（Button-only 版）</title>
+  <meta name="description" content="PocketEditor：Windows 上的 AI 自動剪輯工具。本檔為 button-only 單檔版：不依賴外部 JS，下載一定先彈同意書。" />
   <link rel="icon" href="./favicon.ico" />
-  <!-- 標記：BASELINE_RECOVERY_2025-09-18 -->
   <style>
     :root{--bg:#0b0d12;--card:#10131a;--muted:#b7c0d1;--text:#e8edf7;--acc:#8be58b;--acc2:#8bb3ff;--bd:#1d2330;--radius:16px;--shadow:0 10px 30px rgba(0,0,0,.25)}
     *{box-sizing:border-box}
@@ -73,20 +72,20 @@
         <a href="#how">使用方式</a>
         <a href="#pricing">方案</a>
         <a href="#faq">常見問題</a>
-        <a class="btn" id="download" href="https://github.com/martin310365123-byte/PocketEditor/releases/latest" data-need-consent>下載</a>
+        <!-- ✅ 下載改成 button（不再用 <a href>），就算 JS 出問題也不會直接離站 -->
+        <button class="btn" id="download" data-need-consent data-href="https://github.com/martin310365123-byte/PocketEditor/releases/latest">下載</button>
       </nav>
     </header>
 
     <section class="hero">
       <div class="copy card">
         <h1>AI 自動剪輯，一鍵完成</h1>
-        <p class="lead">這是 <strong>單檔復原版</strong>，包含完整樣式與「每次下載前彈出同意書」邏輯。</p>
+        <p class="lead">Button-only 單檔版：下載一定先彈同意書，Edge 也擋不過去。</p>
         <div class="badges"><span class="badge">Windows / 本機運算</span><span class="badge">MoviePy + FFmpeg</span><span class="badge">Whisper STT</span></div>
         <div class="cta">
-          <a class="btn" id="download-hero" href="https://github.com/martin310365123-byte/PocketEditor/releases/latest" data-need-consent>下載封測版</a>
+          <button class="btn" id="download-hero" data-need-consent data-href="https://github.com/martin310365123-byte/PocketEditor/releases/latest">下載封測版</button>
           <a class="btn secondary" href="https://github.com/martin310365123-byte/PocketEditor/issues/new/choose">回報問題 / 提案</a>
         </div>
-        <p class="muted" style="margin-top:8px">版本標記：<code>BASELINE_RECOVERY_2025-09-18</code></p>
       </div>
       <div class="mock card" aria-hidden="true">
         <div class="mockbox">
@@ -98,13 +97,43 @@
     </section>
 
     <div class="sections">
+      <section id="features" class="section card">
+        <h2>核心功能</h2>
+        <div class="grid">
+          <div class="feat"><h3>去無聲段</h3><p>偵測長時間靜音，自動裁切空白片段，讓敘事更緊湊。</p></div>
+          <div class="feat"><h3>字幕自動生成</h3><p>Whisper STT 轉文字，支援繁中與時間碼修飾。</p></div>
+          <div class="feat"><h3>硬燒與樣式</h3><p>內建字型、大小、邊距設定，避免跳脫字與亂碼。</p></div>
+          <div class="feat"><h3>隨機 BGM + Ducking</h3><p>自動挑選音樂與人聲避讓，維持語音清晰度。</p></div>
+          <div class="feat"><h3>一鍵合成</h3><p>MoviePy + FFmpeg 串接輸出，簡化繁瑣步驟。</p></div>
+          <div class="feat"><h3>可離線運作</h3><p>在本機 Windows 執行，適合長片與內網環境。</p></div>
+        </div>
+      </section>
+
+      <section id="how" class="section card">
+        <h2>如何使用</h2>
+        <div class="how">
+          <div class="step"><strong>1. 準備素材</strong><br>將影片丟入 <code>input/</code> 資料夾。</div>
+          <div class="step"><strong>2. 設定參數</strong><br>依需求調整字幕 CPS、最短/最長顯示等。</div>
+          <div class="step"><strong>3. 執行</strong><br>點選批次檔或於 CLI 下指令。</div>
+          <div class="step"><strong>4. 輸出成片</strong><br>完成後會出現在 <code>output/</code>。</div>
+        </div>
+      </section>
+
+      <section id="pricing" class="section card">
+        <h2>方案（暫定）</h2>
+        <div class="pricing">
+          <div class="price-card"><h4>個人封測</h4><div class="price">Free</div><ul><li>基本去無聲 + 字幕 + BGM</li><li>社群支援</li></ul></div>
+          <div class="price-card"><h4>個人 Pro</h4><div class="price">NT$ 490 / 月</div><ul><li>高品質 STT 模型</li><li>批次處理與佇列</li><li>優先支援</li></ul></div>
+          <div class="price-card"><h4>商用</h4><div class="price">洽談</div><ul><li>團隊授權</li><li>離線企業版</li><li>客製功能</li></ul></div>
+        </div>
+      </section>
+
       <section id="faq" class="section card">
         <h2>常見問題</h2>
         <dl class="faq">
-          <dt>需要網路嗎？</dt>
-          <dd>不需要。PocketEditor 可於 Windows 本機離線執行。</dd>
-          <dt>授權/EULA 與隱私？</dt>
-          <dd>請見頁腳連結；下載前也會顯示同意書。</dd>
+          <dt>需要網路嗎？</dt><dd>不需要。PocketEditor 可於 Windows 本機離線執行。</dd>
+          <dt>字幕亂碼怎麼辦？</dt><dd>請使用「Microsoft JhengHei UI」或其他含中文字型。</dd>
+          <dt>是否支援 GUI？</dt><dd>目前為 CLI，後續會推出 GUI 測試版。</dd>
         </dl>
       </section>
     </div>
@@ -119,7 +148,7 @@
     </footer>
   </div>
 
-  <!-- 安裝同意書（加上 style="display:none"，就算 CSS 失效也不會露出） -->
+  <!-- 安裝同意書（inline 隱藏：就算 CSS 失效也不會露出） -->
   <div id="consent-modal" class="modal" style="display:none" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="dialog" role="document" style="position:relative">
       <button class="close-x" id="consent-close" aria-label="關閉">×</button>
@@ -151,7 +180,7 @@
     // 年份
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // === 單檔同意書邏輯（每次詢問；Edge 相容） ===
+    // === Button-only 同意書邏輯（每次詢問；Edge 相容） ===
     (function(){
       const modal = document.getElementById('consent-modal');
       const agreeBtn = document.getElementById('consent-agree');
@@ -159,69 +188,35 @@
       const closeX = document.getElementById('consent-close');
       const checkbox = document.getElementById('consent-check');
 
-      let pendingUrl = null; let pendingNewTab = false;
-      const NEED = /\/releases\/|\.exe$|\.msi$|\.zip$/i;
-      const hasAccepted = () => false; // 永遠每次詢問（不記錄）
+      let pendingUrl = null;
 
-      function openModal(url, openInNewTab){
-        pendingUrl = url; pendingNewTab = !!openInNewTab;
-        checkbox.checked = false; agreeBtn.disabled = true;
-        modal.style.display = 'flex';
-        modal.classList.add('show');
-        modal.setAttribute('aria-hidden','false');
+      function openModal(url){
+        pendingUrl = url; checkbox.checked = false; agreeBtn.disabled = true;
+        modal.style.display = 'flex'; modal.classList.add('show'); modal.setAttribute('aria-hidden','false');
       }
-      function closeModal(){
-        modal.classList.remove('show');
-        modal.setAttribute('aria-hidden','true');
-        modal.style.display = 'none';
-      }
+      function closeModal(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); modal.style.display = 'none'; pendingUrl = null; }
 
       checkbox.addEventListener('change', ()=>{ agreeBtn.disabled = !checkbox.checked; });
-      cancelBtn.addEventListener('click', ()=>{ pendingUrl=null; pendingNewTab=false; closeModal(); });
-      closeX.addEventListener('click', ()=>{ pendingUrl=null; pendingNewTab=false; closeModal(); });
-      modal.addEventListener('click', (e)=>{ if(e.target===modal){ pendingUrl=null; pendingNewTab=false; closeModal(); } });
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ pendingUrl=null; pendingNewTab=false; closeModal(); } });
+      cancelBtn.addEventListener('click', closeModal);
+      closeX.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
 
-      function needConsentFor(el){
-        const url = (el.getAttribute('data-href') || el.getAttribute('href') || '').trim();
-        if(!url) return null;
-        if(el.hasAttribute('data-need-consent')) return url;
-        if(NEED.test(url)) return url;
-        return null;
-      }
-      function bind(el){
-        if(!el || el.dataset.consentBound==='1') return;
-        const url = needConsentFor(el);
+      function bindButton(btn){
+        if(!btn || btn.dataset.consentBound==='1') return;
+        const url = btn.getAttribute('data-href');
         if(!url) return;
-        el.setAttribute('data-href', url);
-        if(el.tagName.toLowerCase()==='a'){
-          el.removeAttribute('href');
-          el.setAttribute('role','button');
-          el.setAttribute('tabindex','0');
-        }
-        const handler = (openNew)=>{
-          if(hasAccepted()){
-            if(openNew) window.open(url,'_blank'); else window.location.assign(url);
-            return;
-          }
-          openModal(url, !!openNew);
-        };
-        el.addEventListener('pointerdown', (e)=>{ e.preventDefault(); }, true);
-        el.addEventListener('click', (e)=>{ e.preventDefault(); handler(e.metaKey||e.ctrlKey||el.target==='_blank'); }, true);
-        el.addEventListener('auxclick', (e)=>{ if(e.button===1){ e.preventDefault(); handler(true); } }, true);
-        el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); handler(false); } }, true);
-        el.dataset.consentBound='1';
+        btn.addEventListener('click', (e)=>{ e.preventDefault(); openModal(url); }, true);
+        btn.addEventListener('pointerdown', (e)=>{ e.preventDefault(); }, true);
+        btn.dataset.consentBound = '1';
       }
-      function scanAll(){ document.querySelectorAll('a,button').forEach(bind); }
-      scanAll();
-      const mo = new MutationObserver(()=>{ scanAll(); });
-      mo.observe(document.body, { childList:true, subtree:true, attributes:true, attributeFilter:['href','data-href'] });
+
+      // 綁定所有需要同意的按鈕
+      document.querySelectorAll('button[data-need-consent]').forEach(bindButton);
 
       agreeBtn.addEventListener('click', ()=>{
         if(checkbox.checked && pendingUrl){
-          const url = pendingUrl; const openNew = pendingNewTab;
-          pendingUrl=null; pendingNewTab=false; closeModal();
-          if(openNew) window.open(url,'_blank'); else window.location.assign(url);
+          const url = pendingUrl; closeModal(); window.location.assign(url);
         }
       });
     })();
