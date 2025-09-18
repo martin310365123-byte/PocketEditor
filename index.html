@@ -282,9 +282,9 @@
       });
     }
 
-    // 綁定所有下載按鈕（header 與 hero 各一顆）
-    const dl1 = document.getElementById('download');
-    const dl2 = document.getElementById('download-hero');
+    // 自動對所有可能的下載連結套同意書（含 /releases/、.exe、.msi、.zip）
+    const downloadLinkSelector = 'a[href*="/releases/"], a[href$=".exe"], a[href$=".msi"], a[href$=".zip"]';
+    document.querySelectorAll(downloadLinkSelector).forEach(attachConsent);
     if(dl1) attachConsent(dl1);
     if(dl2) attachConsent(dl2);
 
