@@ -5,22 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PocketEditor — 官方網站</title>
   <meta name="description" content="PocketEditor：Windows 上的 AI 自動剪輯工具。去無聲段、字幕自動生成與硬燒、隨機 BGM + Ducking、一鍵合成。" />
+
+  <!-- Icons -->
   <link rel="icon" href="./favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png">
+
+  <!-- Social preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PocketEditor — 官方網站">
+  <meta property="og:description" content="AI 自動剪輯：去無聲、字幕、BGM Ducking、一鍵合成。">
+  <meta property="og:image" content="assets/og-image.jpg">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="twitter:card" content="summary_large_image">
+
   <style>
-    :root{--bg:#0b0d12;--card:#10131a;--muted:#b7c0d1;--text:#e8edf7;--acc:#8be58b;--acc2:#8bb3ff;--bd:#1d2330;--radius:16px;--shadow:0 10px 30px rgba(0,0,0,.25)}
+    :root{
+      --bg:#0b0d12; --card:#10131a; --muted:#b7c0d1; --text:#e8edf7;
+      --acc:#8be58b; --acc2:#8bb3ff; --bd:#1d2330; --radius:16px;
+      --shadow:0 10px 30px rgba(0,0,0,.25)
+    }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","Microsoft JhengHei UI","PingFang TC",sans-serif;background:radial-gradient(1200px 600px at 20% -10%,#162034,transparent),radial-gradient(1000px 500px at 120% 10%,#19223a,transparent),var(--bg);color:var(--text)}
+    body{
+      margin:0;
+      font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","Microsoft JhengHei UI","PingFang TC",sans-serif;
+      background:
+        radial-gradient(1200px 600px at 20% -10%,#162034,transparent),
+        radial-gradient(1000px 500px at 120% 10%,#19223a,transparent),
+        var(--bg);
+      color:var(--text)
+    }
     a{color:var(--acc2);text-decoration:none}
     a:hover{text-decoration:underline}
     .container{max-width:1140px;margin:0 auto;padding:28px}
     header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
     .logo{display:flex;align-items:center;gap:12px}
-    .logo-badge{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--acc),#33d6a6);box-shadow:0 6px 18px rgba(139,229,139,.35)}
+    .logo-img{height:36px;width:auto;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
     nav a, nav button{margin-left:20px;opacity:.95}
-    .btn{display:inline-block;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,var(--acc2),#6fe3ff);color:#0b1220;font-weight:700;box-shadow:0 8px 20px rgba(111,227,255,.25);border:1px solid rgba(255,255,255,.08);cursor:pointer}
+
+    .btn{
+      display:inline-block;padding:12px 18px;border-radius:12px;
+      background:linear-gradient(135deg,var(--acc2),#6fe3ff);
+      color:#0b1220;font-weight:700;
+      box-shadow:0 8px 20px rgba(111,227,255,.25);
+      border:1px solid rgba(255,255,255,.08);cursor:pointer
+    }
     .btn.secondary{background:#1a2233;color:var(--text);border:1px solid #2b3550}
     .btn[disabled]{opacity:.55;cursor:not-allowed}
+
     .hero{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:center;margin-top:24px}
     .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--bd);border-radius:var(--radius);box-shadow:var(--shadow)}
     .hero .copy{padding:36px}
@@ -33,6 +67,7 @@
     .windowbar{display:flex;gap:8px;margin-bottom:10px}
     .dot{width:10px;height:10px;border-radius:50%;background:#2f3a53}
     pre{margin:0;white-space:pre-wrap;word-break:break-word;font-size:13.5px;line-height:1.55;color:#c9d7ff}
+
     .sections{display:grid;gap:18px;margin-top:28px}
     .section{padding:28px}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -51,6 +86,7 @@
     .faq dd{margin:0 0 10px;color:var(--muted)}
     footer{margin:40px 0 20px;color:#9db0d0;font-size:13px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
     footer nav a{margin:0 12px 0 0}
+
     /* Consent Modal */
     .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(8,12,20,.6);backdrop-filter:blur(4px);z-index:9999}
     .modal.show{display:flex}
@@ -59,14 +95,27 @@
     .dialog .muted{font-size:14px}
     .dialog .actions{display:flex;justify-content:flex-end;gap:10px;margin-top:14px}
     .close-x{position:absolute;right:14px;top:10px;border:none;background:transparent;color:#9db0d0;font-size:22px;cursor:pointer}
-    @media (max-width:1000px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.how{grid-template-columns:1fr 1fr}.pricing{grid-template-columns:1fr}}
-    @media (max-width:640px){h1{font-size:34px}.grid{grid-template-columns:1fr}.how{grid-template-columns:1fr}}
+
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr 1fr}
+      .how{grid-template-columns:1fr 1fr}
+      .pricing{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      h1{font-size:34px}
+      .grid{grid-template-columns:1fr}
+      .how{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div class="logo"><div class="logo-badge" aria-hidden="true"></div><strong>PocketEditor</strong></div>
+      <div class="logo">
+        <img src="assets/logo-pocketeditor.png" alt="PocketEditor" class="logo-img" width="36" height="36">
+        <strong>PocketEditor</strong>
+      </div>
       <nav>
         <a href="#features">功能</a>
         <a href="#how">使用方式</a>
@@ -82,7 +131,11 @@
       <div class="copy card">
         <h1>AI 自動剪輯，一鍵完成</h1>
         <p class="lead">去無聲段、字幕自動生成與硬燒、隨機 BGM + Ducking、合成輸出。支援中文工作流程，可離線。</p>
-        <div class="badges"><span class="badge">Windows / 本機運算</span><span class="badge">MoviePy + FFmpeg</span><span class="badge">Whisper STT</span></div>
+        <div class="badges">
+          <span class="badge">Windows / 本機運算</span>
+          <span class="badge">MoviePy + FFmpeg</span>
+          <span class="badge">Whisper STT</span>
+        </div>
         <div class="cta">
           <button class="btn" id="download-hero" data-need-consent data-href="https://github.com/martin310365123-byte/PocketEditor/releases/latest">下載封測版</button>
           <a class="btn secondary" href="https://github.com/martin310365123-byte/PocketEditor/issues/new/choose">回報問題 / 提案</a>
@@ -97,7 +150,7 @@
   --lang zh \
   --fontname "Microsoft JhengHei UI" --fontsize 28 --marginv 40 \
   --concat --concat-which burnin \
-  --music-dir "C:\\Users\\user\\AI Editor\\music" \
+  --music-dir "C:\Users\user\AI Editor\music" \
   --post-bgm-vol 0.12 \
   --subs-cps 18 --subs-min-dur 1.2 --subs-max-dur 5.0 --subs-merge-gap 0.4
 
@@ -232,7 +285,7 @@
       function openModal(url){
         pendingUrl = url; checkbox.checked = false; agreeBtn.disabled = true;
         modal.removeAttribute('hidden');     // 解除原生隱藏
-        modal.style.display = 'flex';        // 顯示（就算 CSS 失效也可見）
+        modal.style.display = 'flex';        // 顯示（即使 CSS 失效也能看見）
         modal.classList.add('show');
         modal.setAttribute('aria-hidden','false');
       }
@@ -240,7 +293,7 @@
         modal.classList.remove('show');
         modal.setAttribute('aria-hidden','true');
         modal.style.display = 'none';        // 隱藏
-        modal.setAttribute('hidden','');     // 再加回原生隱藏
+        modal.setAttribute('hidden','');     // 原生隱藏回來
         pendingUrl = null;
       }
 
