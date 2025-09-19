@@ -6,21 +6,21 @@
   <title>PocketEditor — 官方網站</title>
   <meta name="description" content="PocketEditor：Windows 上的 AI 自動剪輯工具。去無聲段、字幕自動生成與硬燒、隨機 BGM + Ducking、一鍵合成。" />
 
-  <!-- Favicons / Icons （加 version 參數繞過快取） -->
-  <link rel="icon" href="favicon.ico?v=3" sizes="any" type="image/x-icon">
-  <link rel="shortcut icon" href="favicon.ico?v=3" type="image/x-icon">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=3">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=3">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=3">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png?v=3">
-  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png?v=3">
+  <!-- Favicons / Icons（加 version 參數繞過快取） -->
+  <link rel="icon" href="favicon.ico?v=4" sizes="any" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico?v=4" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=4">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=4">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png?v=4">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png?v=4">
   <meta name="theme-color" content="#0b0d12" />
 
   <!-- Social preview -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="PocketEditor — 官方網站">
   <meta property="og:description" content="AI 自動剪輯：去無聲、字幕、BGM Ducking、一鍵合成。">
-  <meta property="og:image" content="assets/og-image.jpg?v=3">
+  <meta property="og:image" content="assets/og-image.jpg?v=4">
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -28,7 +28,10 @@
     :root{
       --bg:#0b0d12; --card:#10131a; --muted:#b7c0d1; --text:#e8edf7;
       --acc:#8be58b; --acc2:#8bb3ff; --bd:#1d2330; --radius:16px;
-      --shadow:0 10px 30px rgba(0,0,0,.25)
+      --shadow:0 10px 30px rgba(0,0,0,.25);
+      /* 放大品牌尺寸（可自行調整最大值） */
+      --logo-size: clamp(56px, 7vw, 112px);
+      --brand-size: clamp(20px, 2.2vw, 26px);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -43,10 +46,15 @@
     }
     a{color:var(--acc2);text-decoration:none}
     a:hover{text-decoration:underline}
-    .container{max-width:1140px;margin:0 auto;padding:28px}
+    .container{max-width:1280px;margin:0 auto;padding:28px} /* 版心加寬 */
     header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
     .logo{display:flex;align-items:center;gap:12px}
-    .logo-img{height:48px;width:auto;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
+    .logo strong{font-size:var(--brand-size);font-weight:800;letter-spacing:.2px}
+    .logo-img{
+      height:var(--logo-size);
+      width:auto;display:block;
+      filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))
+    }
     nav a, nav button{margin-left:20px;opacity:.95}
 
     .btn{
@@ -62,7 +70,8 @@
     .hero{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:center;margin-top:24px}
     .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--bd);border-radius:var(--radius);box-shadow:var(--shadow)}
     .hero .copy{padding:36px}
-    h1{font-size:44px;line-height:1.15;margin:0 0 14px}
+    /* 主標題自適應放大 */
+    h1{font-size:clamp(42px, 6.2vw, 76px);line-height:1.12;margin:0 0 14px}
     p.lead{font-size:18px;color:var(--muted);margin:0 0 22px}
     .badges{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 22px}
     .badge{padding:6px 10px;border:1px solid #2b3550;border-radius:999px;font-size:13px;color:#cfe0ff;background:#151c2a}
@@ -107,7 +116,6 @@
       .pricing{grid-template-columns:1fr}
     }
     @media (max-width:640px){
-      h1{font-size:34px}
       .grid{grid-template-columns:1fr}
       .how{grid-template-columns:1fr}
     }
@@ -118,9 +126,8 @@
     <header>
       <div class="logo">
         <img id="site-logo"
-             src="assets/logo-pocketeditor-transparent.png?v=4"
-             alt="PocketEditor"
-             class="logo-img" width="48" height="48" loading="eager">
+             src="assets/logo-pocketeditor-transparent.png?v=5"
+             alt="PocketEditor" class="logo-img" loading="eager">
         <strong>PocketEditor</strong>
       </div>
       <nav>
@@ -253,7 +260,7 @@
       img?.addEventListener('error', function onErr(){
         if (img.dataset.fallback !== '1') {
           img.dataset.fallback = '1';
-          img.src = 'logo-pocketeditor-transparent.png?v=4';
+          img.src = 'logo-pocketeditor-transparent.png?v=5';
         }
       });
     })();
