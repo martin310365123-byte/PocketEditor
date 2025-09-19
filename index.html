@@ -6,26 +6,19 @@
   <title>PocketEditor — 官方網站</title>
   <meta name="description" content="PocketEditor：Windows 上的 AI 自動剪輯工具。去無聲段、字幕自動生成與硬燒、隨機 BGM + Ducking、一鍵合成。" />
 
-  <!-- Favicons / Icons（先 PNG 再 ICO；加版本參數繞過 Chrome 快取；含 assets 備援） -->
-  <!-- root PNG -->
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=7">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=7">
-  <!-- root ICO -->
-  <link rel="icon" href="favicon.ico?v=7" sizes="any" type="image/x-icon">
-  <link rel="shortcut icon" href="favicon.ico?v=7" type="image/x-icon">
-  <!-- assets fallback -->
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=7">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=7">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=7">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png?v=7">
-  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png?v=7">
+  <!-- ★★★ FAVICONS：使用『絕對路徑 + Repo 名』，避免 Chrome 解析錯誤 ★★★ -->
+  <!-- 將 Repo 名替換成你的實際名稱（目前是 PocketEditor） -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/PocketEditor/favicon-32x32.png?v=8">
+  <link rel="icon" type="image/png" sizes="16x16" href="/PocketEditor/favicon-16x16.png?v=8">
+  <link rel="icon" href="/PocketEditor/favicon.ico?v=8" sizes="any" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/PocketEditor/assets/apple-touch-icon.png?v=8">
   <meta name="theme-color" content="#0b0d12" />
 
   <!-- Social preview -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="PocketEditor — 官方網站">
   <meta property="og:description" content="AI 自動剪輯：去無聲、字幕、BGM Ducking、一鍵合成。">
-  <meta property="og:image" content="assets/og-image.jpg?v=7">
+  <meta property="og:image" content="/PocketEditor/assets/og-image.jpg?v=8">
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -122,9 +115,9 @@
   <div class="container">
     <header>
       <div class="logo" aria-label="PocketEditor">
-        <!-- 只保留圖示 -->
+        <!-- 只保留圖示；已移除旁邊文字 -->
         <img id="site-logo"
-             src="assets/logo-pocketeditor-transparent.png?v=7"
+             src="/PocketEditor/assets/logo-pocketeditor-transparent.png?v=8"
              alt="PocketEditor" class="logo-img" loading="eager">
       </div>
       <nav>
@@ -190,23 +183,23 @@
           <div class="step"><strong>2. 設定參數</strong><br>依需求調整字幕 CPS、最短/最長顯示等。</div>
           <div class="step"><strong>3. 執行</strong><br>點選批次檔或於 CLI 下指令。</div>
           <div class="step"><strong>4. 輸出成片</strong><br>完成後會出現在 <code>output/</code>。</div>
-        </div>
 
-        <h3 id="video" style="margin-top:18px">教學影片</h3>
-        <div class="vid-wrap card" style="overflow:hidden;border-radius:14px;border:1px solid var(--bd);margin-top:12px">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/4ekbRZQI_HQ?rel=0&modestbranding=1&playsinline=1"
-            title="PocketEditor 使用教學"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-            loading="lazy"
-            style="width:100%;aspect-ratio:16/9;display:block">
-          </iframe>
-          <p class="muted" style="margin:10px 0 0">
-            若無法播放，<a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ" target="_blank" rel="noopener">改在 YouTube 開啟</a>
-          </p>
+          <h3 id="video" style="margin-top:18px">教學影片</h3>
+          <div class="vid-wrap card" style="overflow:hidden;border-radius:14px;border:1px solid var(--bd);margin-top:12px">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/4ekbRZQI_HQ?rel=0&modestbranding=1&playsinline=1"
+              title="PocketEditor 使用教學"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              loading="lazy"
+              style="width:100%;aspect-ratio:16/9;display:block">
+            </iframe>
+            <p class="muted" style="margin:10px 0 0">
+              若無法播放，<a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ" target="_blank" rel="noopener">改在 YouTube 開啟</a>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -231,49 +224,48 @@
 
     <footer>
       <nav>
-        <a href="privacy.html">隱私權政策</a>
-        <a href="eula.html">授權/EULA</a>
+        <a href="/PocketEditor/privacy.html">隱私權政策</a>
+        <a href="/PocketEditor/eula.html">授權/EULA</a>
         <a href="mailto:hello@smartcut.app">聯絡我們</a>
       </nav>
       <div>© <span id="y"></span> PocketEditor</div>
     </footer>
   </div>
 
-  <!-- Logo 圖示路徑備援（assets 失敗就退到根目錄） -->
+  <!-- Logo 圖示備援：assets 失敗就退回根目錄 -->
   <script>
     (function(){
       const img = document.getElementById('site-logo');
       img?.addEventListener('error', function onErr(){
         if (img.dataset.fallback !== '1') {
           img.dataset.fallback = '1';
-          img.src = 'logo-pocketeditor-transparent.png?v=7';
+          img.src = '/PocketEditor/logo-pocketeditor-transparent.png?v=8';
         }
       });
     })();
   </script>
 
-  <!-- 讓 Chrome 重新掛載 favicon（處理頑固快取） -->
+  <!-- 強制刷新 favicon（處理瀏覽器頑固快取） -->
   <script>
     (function refreshFavicons(){
-      const links = Array.from(document.querySelectorAll('link[rel~="icon"],link[rel="shortcut icon"]'));
       const v = Date.now().toString();
-      links.forEach(link=>{
-        try{
-          const u = new URL(link.getAttribute('href'), location.href);
-          u.searchParams.set('v', v);
-          link.setAttribute('href', u.pathname + '?' + u.searchParams.toString());
-        }catch(e){}
+      ['icon','shortcut icon'].forEach(rel=>{
+        document.querySelectorAll(`link[rel="${rel}"]`).forEach(link=>{
+          const url = new URL(link.href, location.href);
+          url.searchParams.set('v', v);
+          link.href = url.pathname + '?' + url.searchParams.toString();
+        });
       });
     })();
   </script>
 
-  <!-- 安裝同意書 -->
+  <!-- 安裝同意書（每次詢問） -->
   <div id="consent-modal" class="modal" hidden style="display:none" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="dialog" role="document" style="position:relative">
       <button class="close-x" id="consent-close" aria-label="關閉">×</button>
       <h3>安裝同意書</h3>
-      <p class="muted">下載前，請閱讀並同意 <a href="eula.html" target="_blank" rel="noopener">最終用戶授權合約（EULA）</a> 與
-        <a href="privacy.html" target="_blank" rel="noopener">隱私權政策</a>。您也可保留一份副本。</p>
+      <p class="muted">下載前，請閱讀並同意 <a href="/PocketEditor/eula.html" target="_blank" rel="noopener">最終用戶授權合約（EULA）</a> 與
+        <a href="/PocketEditor/privacy.html" target="_blank" rel="noopener">隱私權政策</a>。您也可保留一份副本。</p>
       <label style="display:flex;gap:8px;align-items:flex-start;margin-top:10px">
         <input type="checkbox" id="consent-check" style="margin-top:4px">
         <span>我已閱讀並同意上述條款，且年滿法定年齡。</span>
@@ -338,7 +330,6 @@
         btn.addEventListener('pointerdown', (e)=>{ e.preventDefault(); }, true);
         btn.dataset.consentBound = '1';
       }
-
       document.querySelectorAll('button[data-need-consent]').forEach(bindButton);
 
       agreeBtn.addEventListener('click', ()=>{
