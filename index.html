@@ -6,21 +6,25 @@
   <title>PocketEditor — 官方網站</title>
   <meta name="description" content="PocketEditor：Windows 上的 AI 自動剪輯工具。去無聲段、字幕自動生成與硬燒、隨機 BGM + Ducking、一鍵合成。" />
 
-  <!-- Favicons / Icons（加 version 參數繞過快取） -->
-  <link rel="icon" href="favicon.ico?v=4" sizes="any" type="image/x-icon">
-  <link rel="shortcut icon" href="favicon.ico?v=4" type="image/x-icon">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=4">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=4">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=4">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png?v=4">
-  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png?v=4">
+  <!-- Favicons / Icons（增加多來源 + 版本參數，解決 Chrome 快取） -->
+  <!-- 根目錄版本 -->
+  <link rel="icon" href="favicon.ico?v=6" sizes="any" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico?v=6" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=6">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=6">
+  <!-- assets 備援版本（若根目錄沒有也能抓到） -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=6">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=6">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=6">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png?v=6">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png?v=6">
   <meta name="theme-color" content="#0b0d12" />
 
   <!-- Social preview -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="PocketEditor — 官方網站">
   <meta property="og:description" content="AI 自動剪輯：去無聲、字幕、BGM Ducking、一鍵合成。">
-  <meta property="og:image" content="assets/og-image.jpg?v=4">
+  <meta property="og:image" content="assets/og-image.jpg?v=6">
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -29,9 +33,7 @@
       --bg:#0b0d12; --card:#10131a; --muted:#b7c0d1; --text:#e8edf7;
       --acc:#8be58b; --acc2:#8bb3ff; --bd:#1d2330; --radius:16px;
       --shadow:0 10px 30px rgba(0,0,0,.25);
-      /* 放大品牌尺寸（可自行調整最大值） */
       --logo-size: clamp(56px, 7vw, 112px);
-      --brand-size: clamp(20px, 2.2vw, 26px);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -46,15 +48,10 @@
     }
     a{color:var(--acc2);text-decoration:none}
     a:hover{text-decoration:underline}
-    .container{max-width:1280px;margin:0 auto;padding:28px} /* 版心加寬 */
+    .container{max-width:1280px;margin:0 auto;padding:28px}
     header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo strong{font-size:var(--brand-size);font-weight:800;letter-spacing:.2px}
-    .logo-img{
-      height:var(--logo-size);
-      width:auto;display:block;
-      filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))
-    }
+    .logo{display:flex;align-items:center;gap:8px}
+    .logo-img{height:var(--logo-size);width:auto;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
     nav a, nav button{margin-left:20px;opacity:.95}
 
     .btn{
@@ -70,7 +67,6 @@
     .hero{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:center;margin-top:24px}
     .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--bd);border-radius:var(--radius);box-shadow:var(--shadow)}
     .hero .copy{padding:36px}
-    /* 主標題自適應放大 */
     h1{font-size:clamp(42px, 6.2vw, 76px);line-height:1.12;margin:0 0 14px}
     p.lead{font-size:18px;color:var(--muted);margin:0 0 22px}
     .badges{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 22px}
@@ -124,11 +120,11 @@
 <body>
   <div class="container">
     <header>
-      <div class="logo">
+      <div class="logo" aria-label="PocketEditor">
+        <!-- 只保留圖示；移除文字 -->
         <img id="site-logo"
-             src="assets/logo-pocketeditor-transparent.png?v=5"
+             src="assets/logo-pocketeditor-transparent.png?v=6"
              alt="PocketEditor" class="logo-img" loading="eager">
-        <strong>PocketEditor</strong>
       </div>
       <nav>
         <a href="#features">功能</a>
@@ -195,7 +191,7 @@
           <div class="step"><strong>4. 輸出成片</strong><br>完成後會出現在 <code>output/</code>。</div>
         </div>
 
-        <!-- 教學影片（YouTube (nocookie) 嵌入 + 備用連結） -->
+        <!-- 教學影片 -->
         <h3 id="video" style="margin-top:18px">教學影片</h3>
         <div class="vid-wrap card" style="overflow:hidden;border-radius:14px;border:1px solid var(--bd);margin-top:12px">
           <iframe
@@ -211,16 +207,6 @@
           <p class="muted" style="margin:10px 0 0">
             若無法播放，<a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ" target="_blank" rel="noopener">改在 YouTube 開啟</a>
           </p>
-          <details style="margin:10px 0 0">
-            <summary><strong>章節與重點</strong></summary>
-            <ul style="margin:10px 0 0; color:#b7c0d1; line-height:1.7">
-              <li><a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ&t=10s" target="_blank" rel="noopener">00:10</a> 下載與安裝</li>
-              <li><a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ&t=75s" target="_blank" rel="noopener">01:15</a> 基本參數說明</li>
-              <li><a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ&t=180s" target="_blank" rel="noopener">03:00</a> 去無聲 + 字幕</li>
-              <li><a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ&t=260s" target="_blank" rel="noopener">04:20</a> BGM 與 Ducking</li>
-              <li><a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ&t=330s" target="_blank" rel="noopener">05:30</a> 合成輸出</li>
-            </ul>
-          </details>
         </div>
       </section>
 
@@ -253,20 +239,20 @@
     </footer>
   </div>
 
-  <!-- Logo 路徑備援（assets 失敗就退到根目錄） -->
+  <!-- Logo 圖示路徑備援（assets 失敗就退到根目錄） -->
   <script>
     (function(){
       const img = document.getElementById('site-logo');
       img?.addEventListener('error', function onErr(){
         if (img.dataset.fallback !== '1') {
           img.dataset.fallback = '1';
-          img.src = 'logo-pocketeditor-transparent.png?v=5';
+          img.src = 'logo-pocketeditor-transparent.png?v=6';
         }
       });
     })();
   </script>
 
-  <!-- 安裝同意書（三重保險：hidden + inline display:none + CSS） -->
+  <!-- 安裝同意書 -->
   <div id="consent-modal" class="modal" hidden style="display:none" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="dialog" role="document" style="position:relative">
       <button class="close-x" id="consent-close" aria-label="關閉">×</button>
@@ -298,7 +284,7 @@
     // 年份
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // === Button-only 同意書邏輯（每次詢問；Edge 相容；三重保險顯示/隱藏） ===
+    // 同意書（每次詢問）
     (function(){
       const modal     = document.getElementById('consent-modal');
       const agreeBtn  = document.getElementById('consent-agree');
@@ -310,16 +296,16 @@
 
       function openModal(url){
         pendingUrl = url; checkbox.checked = false; agreeBtn.disabled = true;
-        modal.removeAttribute('hidden');     // 解除原生隱藏
-        modal.style.display = 'flex';        // 顯示（即使 CSS 失效也能看見）
+        modal.removeAttribute('hidden');
+        modal.style.display = 'flex';
         modal.classList.add('show');
         modal.setAttribute('aria-hidden','false');
       }
       function closeModal(){
         modal.classList.remove('show');
         modal.setAttribute('aria-hidden','true');
-        modal.style.display = 'none';        // 隱藏
-        modal.setAttribute('hidden','');     // 原生隱藏回來
+        modal.style.display = 'none';
+        modal.setAttribute('hidden','');
         pendingUrl = null;
       }
 
@@ -338,7 +324,6 @@
         btn.dataset.consentBound = '1';
       }
 
-      // 綁定所有需要同意的按鈕
       document.querySelectorAll('button[data-need-consent]').forEach(bindButton);
 
       agreeBtn.addEventListener('click', ()=>{
