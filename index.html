@@ -113,7 +113,10 @@
   <div class="container">
     <header>
       <div class="logo">
-        <img src="assets/logo-pocketeditor.png" alt="PocketEditor" class="logo-img" width="36" height="36">
+        <img id="site-logo"
+             src="assets/logo-pocketeditor.png?v=1"
+             alt="PocketEditor"
+             class="logo-img" width="36" height="36" loading="eager">
         <strong>PocketEditor</strong>
       </div>
       <nav>
@@ -239,6 +242,19 @@
       <div>© <span id="y"></span> PocketEditor</div>
     </footer>
   </div>
+
+  <!-- Logo 路徑備援（assets 失敗就退到根目錄） -->
+  <script>
+    (function(){
+      const img = document.getElementById('site-logo');
+      img?.addEventListener('error', function onErr(){
+        if (img.dataset.fallback !== '1') {
+          img.dataset.fallback = '1';
+          img.src = 'logo-pocketeditor.png?v=1';
+        }
+      });
+    })();
+  </script>
 
   <!-- 安裝同意書（三重保險：hidden + inline display:none + CSS） -->
   <div id="consent-modal" class="modal" hidden style="display:none" aria-hidden="true" role="dialog" aria-modal="true">
