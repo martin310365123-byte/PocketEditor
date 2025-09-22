@@ -6,18 +6,18 @@
   <title>PocketEditor — 官方網站</title>
   <meta name="description" content="PocketEditor：Windows 上的 AI 自動剪輯工具。去無聲段、字幕自動生成與硬燒、隨機 BGM + Ducking、一鍵合成。" />
 
-  <!-- Favicons（使用絕對路徑到 repo 根目錄；加版本參數繞過快取） -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/PocketEditor/favicon-32x32.png?v=10">
-  <link rel="icon" type="image/png" sizes="16x16" href="/PocketEditor/favicon-16x16.png?v=10">
-  <link rel="icon" href="/PocketEditor/favicon.ico?v=10" sizes="any" type="image/x-icon">
-  <link rel="apple-touch-icon" sizes="180x180" href="/PocketEditor/assets/apple-touch-icon.png?v=10">
+  <!-- Favicons（指向 repo 根目錄；加版本參數破快取） -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/PocketEditor/favicon-32x32.png?v=11">
+  <link rel="icon" type="image/png" sizes="16x16" href="/PocketEditor/favicon-16x16.png?v=11">
+  <link rel="icon" href="/PocketEditor/favicon.ico?v=11" sizes="any" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/PocketEditor/assets/apple-touch-icon.png?v=11">
   <meta name="theme-color" content="#0b0d12" />
 
   <!-- Social preview -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="PocketEditor — 官方網站">
   <meta property="og:description" content="AI 自動剪輯：去無聲、字幕、BGM Ducking、一鍵合成。">
-  <meta property="og:image" content="/PocketEditor/assets/og-image.jpg?v=10">
+  <meta property="og:image" content="/PocketEditor/assets/og-image.jpg?v=11">
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -27,6 +27,7 @@
       --acc:#8be58b; --acc2:#8bb3ff; --bd:#1d2330; --radius:16px;
       --shadow:0 10px 30px rgba(0,0,0,.25);
       --logo-size: clamp(56px, 7vw, 112px);
+      --sec-pad: 28px;                /* .section padding（給影片貼齊時用） */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -41,6 +42,7 @@
     }
     a{color:var(--acc2);text-decoration:none}
     a:hover{text-decoration:underline}
+
     .container{max-width:1280px;margin:0 auto;padding:28px}
     header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
     .logo{display:flex;align-items:center;gap:8px}
@@ -71,7 +73,7 @@
     pre{margin:0;white-space:pre-wrap;word-break:break-word;font-size:13.5px;line-height:1.55;color:#c9d7ff}
 
     .sections{display:grid;gap:18px;margin-top:28px}
-    .section{padding:28px}
+    .section{padding:var(--sec-pad)}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .feat{padding:18px;border:1px solid var(--bd);border-radius:14px;background:#0f1420}
     .feat h3{margin:0 0 6px;font-size:18px}
@@ -89,11 +91,21 @@
     footer{margin:40px 0 20px;color:#9db0d0;font-size:13px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
     footer nav a{margin:0 12px 0 0}
 
-    /* 影片滿版（Full-bleed）— 扣除容器左右 padding 28px */
-    .fullbleed{
-      width: calc(100vw - 56px);
-      margin-left: calc(50% - 50vw + 28px);
-      margin-right: calc(50% - 50vw + 28px);
+    /* 影片「貼齊外框」：吃掉 .section 的左右 padding */
+    .edge-to-border{
+      margin-left: calc(-1 * var(--sec-pad));
+      margin-right: calc(-1 * var(--sec-pad));
+      width: calc(100% + (var(--sec-pad) * 2));
+      border-radius: 14px;
+      overflow: hidden;                 /* 裁掉圓角外溢 */
+      border: 1px solid var(--bd);      /* 保留卡片的邊線視覺 */
+      background:#0c111b;
+    }
+    .video-iframe{
+      display:block;
+      width:100%;
+      aspect-ratio:16/9;                 /* 需要更「電影感」可改 21/9 */
+      border:0;
     }
 
     /* Consent Modal */
@@ -123,7 +135,7 @@
       <div class="logo" aria-label="PocketEditor">
         <!-- 只保留圖示 -->
         <img id="site-logo"
-             src="/PocketEditor/assets/logo-pocketeditor-transparent.png?v=10"
+             src="/PocketEditor/assets/logo-pocketeditor-transparent.png?v=11"
              alt="PocketEditor" class="logo-img" loading="eager">
       </div>
       <nav>
@@ -185,24 +197,24 @@
       <section id="how" class="section card">
         <h2>如何使用</h2>
 
-        <!-- 教學影片（加大：fullbleed） -->
+        <!-- 教學影片：貼齊外框 -->
         <h3 id="video" style="margin-top:4px">教學影片</h3>
-        <div class="vid-wrap card fullbleed" style="overflow:hidden;border-radius:14px;border:1px solid var(--bd);margin-top:12px">
+        <div class="edge-to-border" style="margin-top:12px">
           <iframe
+            class="video-iframe"
             src="https://www.youtube-nocookie.com/embed/4ekbRZQI_HQ?rel=0&modestbranding=1&playsinline=1"
             title="PocketEditor 使用教學"
-            frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen
-            loading="lazy"
-            style="width:100%;aspect-ratio:16/9;display:block">
+            loading="lazy">
           </iframe>
-          <p class="muted" style="margin:10px 0 0">
-            若無法播放，<a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ" target="_blank" rel="noopener">改在 YouTube 開啟</a>
-          </p>
         </div>
+        <p class="muted" style="margin:10px 0 0">
+          若無法播放，<a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ" target="_blank" rel="noopener">改在 YouTube 開啟</a>
+        </p>
 
+        <!-- 簡易步驟 -->
         <div class="how" style="margin-top:18px">
           <div class="step"><strong>1. 準備素材</strong><br>將影片丟入 <code>input/</code> 資料夾。</div>
           <div class="step"><strong>2. 設定參數</strong><br>依需求調整字幕 CPS、最短/最長顯示等。</div>
@@ -247,13 +259,13 @@
       img?.addEventListener('error', function onErr(){
         if (img.dataset.fallback !== '1') {
           img.dataset.fallback = '1';
-          img.src = '/PocketEditor/logo-pocketeditor-transparent.png?v=10';
+          img.src = '/PocketEditor/logo-pocketeditor-transparent.png?v=11';
         }
       });
     })();
   </script>
 
-  <!-- 強制刷新 favicon（處理瀏覽器頑固快取） -->
+  <!-- 強制刷新 favicon（處理瀏覽器快取頑固） -->
   <script>
     (function refreshFavicons(){
       const v = Date.now().toString();
@@ -338,7 +350,6 @@
         btn.addEventListener('pointerdown', (e)=>{ e.preventDefault(); }, true);
         btn.dataset.consentBound = '1';
       }
-
       document.querySelectorAll('button[data-need-consent]').forEach(bindButton);
 
       agreeBtn.addEventListener('click', ()=>{
