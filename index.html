@@ -6,19 +6,18 @@
   <title>PocketEditor — 官方網站</title>
   <meta name="description" content="PocketEditor：Windows 上的 AI 自動剪輯工具。去無聲段、字幕自動生成與硬燒、隨機 BGM + Ducking、一鍵合成。" />
 
-  <!-- ★★★ FAVICONS：使用『絕對路徑 + Repo 名』，避免 Chrome 解析錯誤 ★★★ -->
-  <!-- 將 Repo 名替換成你的實際名稱（目前是 PocketEditor） -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/PocketEditor/favicon-32x32.png?v=8">
-  <link rel="icon" type="image/png" sizes="16x16" href="/PocketEditor/favicon-16x16.png?v=8">
-  <link rel="icon" href="/PocketEditor/favicon.ico?v=8" sizes="any" type="image/x-icon">
-  <link rel="apple-touch-icon" sizes="180x180" href="/PocketEditor/assets/apple-touch-icon.png?v=8">
+  <!-- Favicons（使用絕對路徑到 repo 根目錄；加版本參數繞過快取） -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/PocketEditor/favicon-32x32.png?v=10">
+  <link rel="icon" type="image/png" sizes="16x16" href="/PocketEditor/favicon-16x16.png?v=10">
+  <link rel="icon" href="/PocketEditor/favicon.ico?v=10" sizes="any" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/PocketEditor/assets/apple-touch-icon.png?v=10">
   <meta name="theme-color" content="#0b0d12" />
 
   <!-- Social preview -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="PocketEditor — 官方網站">
   <meta property="og:description" content="AI 自動剪輯：去無聲、字幕、BGM Ducking、一鍵合成。">
-  <meta property="og:image" content="/PocketEditor/assets/og-image.jpg?v=8">
+  <meta property="og:image" content="/PocketEditor/assets/og-image.jpg?v=10">
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -90,6 +89,13 @@
     footer{margin:40px 0 20px;color:#9db0d0;font-size:13px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
     footer nav a{margin:0 12px 0 0}
 
+    /* 影片滿版（Full-bleed）— 扣除容器左右 padding 28px */
+    .fullbleed{
+      width: calc(100vw - 56px);
+      margin-left: calc(50% - 50vw + 28px);
+      margin-right: calc(50% - 50vw + 28px);
+    }
+
     /* Consent Modal */
     .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(8,12,20,.6);backdrop-filter:blur(4px);z-index:9999}
     .modal.show{display:flex}
@@ -115,9 +121,9 @@
   <div class="container">
     <header>
       <div class="logo" aria-label="PocketEditor">
-        <!-- 只保留圖示；已移除旁邊文字 -->
+        <!-- 只保留圖示 -->
         <img id="site-logo"
-             src="/PocketEditor/assets/logo-pocketeditor-transparent.png?v=8"
+             src="/PocketEditor/assets/logo-pocketeditor-transparent.png?v=10"
              alt="PocketEditor" class="logo-img" loading="eager">
       </div>
       <nav>
@@ -178,28 +184,30 @@
 
       <section id="how" class="section card">
         <h2>如何使用</h2>
-        <div class="how">
+
+        <!-- 教學影片（加大：fullbleed） -->
+        <h3 id="video" style="margin-top:4px">教學影片</h3>
+        <div class="vid-wrap card fullbleed" style="overflow:hidden;border-radius:14px;border:1px solid var(--bd);margin-top:12px">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/4ekbRZQI_HQ?rel=0&modestbranding=1&playsinline=1"
+            title="PocketEditor 使用教學"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+            loading="lazy"
+            style="width:100%;aspect-ratio:16/9;display:block">
+          </iframe>
+          <p class="muted" style="margin:10px 0 0">
+            若無法播放，<a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ" target="_blank" rel="noopener">改在 YouTube 開啟</a>
+          </p>
+        </div>
+
+        <div class="how" style="margin-top:18px">
           <div class="step"><strong>1. 準備素材</strong><br>將影片丟入 <code>input/</code> 資料夾。</div>
           <div class="step"><strong>2. 設定參數</strong><br>依需求調整字幕 CPS、最短/最長顯示等。</div>
           <div class="step"><strong>3. 執行</strong><br>點選批次檔或於 CLI 下指令。</div>
           <div class="step"><strong>4. 輸出成片</strong><br>完成後會出現在 <code>output/</code>。</div>
-
-          <h3 id="video" style="margin-top:18px">教學影片</h3>
-          <div class="vid-wrap card" style="overflow:hidden;border-radius:14px;border:1px solid var(--bd);margin-top:12px">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/4ekbRZQI_HQ?rel=0&modestbranding=1&playsinline=1"
-              title="PocketEditor 使用教學"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-              loading="lazy"
-              style="width:100%;aspect-ratio:16/9;display:block">
-            </iframe>
-            <p class="muted" style="margin:10px 0 0">
-              若無法播放，<a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ" target="_blank" rel="noopener">改在 YouTube 開啟</a>
-            </p>
-          </div>
         </div>
       </section>
 
@@ -239,7 +247,7 @@
       img?.addEventListener('error', function onErr(){
         if (img.dataset.fallback !== '1') {
           img.dataset.fallback = '1';
-          img.src = '/PocketEditor/logo-pocketeditor-transparent.png?v=8';
+          img.src = '/PocketEditor/logo-pocketeditor-transparent.png?v=10';
         }
       });
     })();
@@ -249,12 +257,12 @@
   <script>
     (function refreshFavicons(){
       const v = Date.now().toString();
-      ['icon','shortcut icon'].forEach(rel=>{
-        document.querySelectorAll(`link[rel="${rel}"]`).forEach(link=>{
+      document.querySelectorAll('link[rel~="icon"],link[rel="shortcut icon"]').forEach(link=>{
+        try{
           const url = new URL(link.href, location.href);
           url.searchParams.set('v', v);
           link.href = url.pathname + '?' + url.searchParams.toString();
-        });
+        }catch(e){}
       });
     })();
   </script>
@@ -330,6 +338,7 @@
         btn.addEventListener('pointerdown', (e)=>{ e.preventDefault(); }, true);
         btn.dataset.consentBound = '1';
       }
+
       document.querySelectorAll('button[data-need-consent]').forEach(bindButton);
 
       agreeBtn.addEventListener('click', ()=>{
