@@ -6,18 +6,18 @@
   <title>pockitEdit — 官方網站</title>
   <meta name="description" content="pockitEdit：Windows 上的 AI 自動剪輯工具。去無聲段、字幕自動生成與硬燒、隨機 BGM + Ducking、一鍵合成。" />
 
-  <!-- Favicons（指向 repo 根目錄；加版本參數破快取） -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/pockitEdit/favicon-32x32.png?v=12">
-  <link rel="icon" type="image/png" sizes="16x16" href="/pockitEdit/favicon-16x16.png?v=12">
-  <link rel="icon" href="/pockitEdit/favicon.ico?v=12" sizes="any" type="image/x-icon">
-  <link rel="apple-touch-icon" sizes="180x180" href="/pockitEdit/assets/apple-touch-icon.png?v=12">
+  <!-- Favicons：相對路徑（與本檔同層） -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=13">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=13">
+  <link rel="icon" href="./favicon.ico?v=13" sizes="any" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png?v=13">
   <meta name="theme-color" content="#0b0d12" />
 
-  <!-- Social preview -->
+  <!-- Social preview（相對路徑） -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="pockitEdit — 官方網站">
   <meta property="og:description" content="AI 自動剪輯：去無聲、字幕、BGM Ducking、一鍵合成。">
-  <meta property="og:image" content="/pockitEdit/assets/og-image.jpg?v=12">
+  <meta property="og:image" content="./assets/og-image.jpg?v=13">
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -27,7 +27,7 @@
       --acc:#8be58b; --acc2:#8bb3ff; --bd:#1d2330; --radius:16px;
       --shadow:0 10px 30px rgba(0,0,0,.25);
       --logo-size: clamp(56px, 7vw, 112px);
-      --sec-pad: 28px;                /* .section padding（給影片貼齊時用） */
+      --sec-pad: 28px; /* .section padding（給影片貼齊時用） */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -135,7 +135,7 @@
       <div class="logo" aria-label="pockitEdit">
         <!-- 只保留圖示 -->
         <img id="site-logo"
-             src="/pockitEdit/assets/logo-pocketeditor-transparent.png?v=12"
+             src="./assets/logo-pocketeditor-transparent.png?v=13"
              alt="pockitEdit" class="logo-img" loading="eager">
       </div>
       <nav>
@@ -244,26 +244,13 @@
 
     <footer>
       <nav>
-        <a href="/pockitEdit/privacy.html">隱私權政策</a>
-        <a href="/pockitEdit/eula.html">授權/EULA</a>
+        <a href="./privacy.html">隱私權政策</a>
+        <a href="./eula.html">授權/EULA</a>
         <a href="mailto:hello@smartcut.app">聯絡我們</a>
       </nav>
       <div>© <span id="y"></span> pockitEdit</div>
     </footer>
   </div>
-
-  <!-- Logo 圖示備援：assets 失敗就退回根目錄 -->
-  <script>
-    (function(){
-      const img = document.getElementById('site-logo');
-      img?.addEventListener('error', function onErr(){
-        if (img.dataset.fallback !== '1') {
-          img.dataset.fallback = '1';
-          img.src = '/pockitEdit/logo-pocketeditor-transparent.png?v=12';
-        }
-      });
-    })();
-  </script>
 
   <!-- 強制刷新 favicon（處理瀏覽器快取頑固） -->
   <script>
@@ -284,8 +271,8 @@
     <div class="dialog" role="document" style="position:relative">
       <button class="close-x" id="consent-close" aria-label="關閉">×</button>
       <h3>安裝同意書</h3>
-      <p class="muted">下載前，請閱讀並同意 <a href="/pockitEdit/eula.html" target="_blank" rel="noopener">最終用戶授權合約（EULA）</a> 與
-        <a href="/pockitEdit/privacy.html" target="_blank" rel="noopener">隱私權政策</a>。您也可保留一份副本。</p>
+      <p class="muted">下載前，請閱讀並同意 <a href="./eula.html" target="_blank" rel="noopener">最終用戶授權合約（EULA）</a> 與
+        <a href="./privacy.html" target="_blank" rel="noopener">隱私權政策</a>。您也可保留一份副本。</p>
       <label style="display:flex;gap:8px;align-items:flex-start;margin-top:10px">
         <input type="checkbox" id="consent-check" style="margin-top:4px">
         <span>我已閱讀並同意上述條款，且年滿法定年齡。</span>
