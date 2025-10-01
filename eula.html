@@ -3,169 +3,130 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PocketEditor — 最終用戶授權合約（EULA）</title>
-  <meta name="description" content="PocketEditor EULA：授權範圍、限制、所有權、開源元件、保固免責、責任限制、終止與準據法。" />
-  <link rel="icon" href="./favicon.ico" />
+  <title>pockitEdit — 最終用戶授權合約（EULA）</title>
+  <meta name="description" content="pockitEdit EULA：使用授權、限制、免責與其他條款。" />
 
-  <!-- 社群預覽（OG / Twitter） -->
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="PocketEditor — 最終用戶授權合約（EULA）" />
-  <meta property="og:description" content="授權範圍、使用限制、免責與責任限制、準據法等。" />
-  <meta property="og:image" content="assets/og-image.jpg" />
-  <meta property="og:locale" content="zh_TW" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <!-- Favicons（指向 /pockitEdit/；版本參數破快取） -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/pockitEdit/favicon-32x32.png?v=12">
+  <link rel="icon" type="image/png" sizes="16x16" href="/pockitEdit/favicon-16x16.png?v=12">
+  <link rel="icon" href="/pockitEdit/favicon.ico?v=12" sizes="any" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/pockitEdit/assets/apple-touch-icon.png?v=12">
+  <meta name="theme-color" content="#0b0d12" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="pockitEdit — 最終用戶授權合約（EULA）">
+  <meta property="og:description" content="使用 pockitEdit 需遵守之授權條款與限制。">
+  <meta property="og:image" content="/pockitEdit/assets/og-image.jpg?v=12">
+  <meta property="og:locale" content="zh_TW">
 
   <style>
-    :root{--bg:#0b0d12;--card:#10131a;--muted:#b7c0d1;--text:#e8edf7;--acc:#8bb3ff;--bd:#1d2330;--radius:16px}
+    :root{ --bg:#0b0d12; --card:#10131a; --muted:#b7c0d1; --text:#e8edf7; --bd:#1d2330; --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.25); --sec-pad:28px; }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","Microsoft JhengHei UI","PingFang TC",sans-serif}
+    body{margin:0;background:radial-gradient(1200px 600px at 20% -10%,#162034,transparent), radial-gradient(1000px 500px at 120% 10%,#19223a,transparent), var(--bg); color:var(--text); font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","Microsoft JhengHei UI","PingFang TC",sans-serif}
+    a{color:#8bb3ff;text-decoration:none} a:hover{text-decoration:underline}
     .container{max-width:960px;margin:0 auto;padding:28px}
-    a{color:var(--acc);text-decoration:none}
-    a:hover{text-decoration:underline}
-    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--bd);border-radius:var(--radius);padding:22px}
-    h1{margin:8px 0 4px}
-    h2{margin-top:28px}
-    .muted{color:var(--muted)}
-    ul{line-height:1.7}
-    code{background:#0f1420;border:1px solid #1f2740;padding:2px 6px;border-radius:8px}
-
-    /* 列印友善 */
-    @media print {
-      body { background:#fff; color:#000; }
-      .card { background:#fff; border:1px solid #333; }
-      a { color:#000; }
-      a::after { content:" (" attr(href) ")"; font-size:12px; }
-    }
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo img{height:56px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
+    .btn{display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid #2b3550;background:#151c2a;color:#e8edf7}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01)); border:1px solid var(--bd); border-radius:var(--radius); box-shadow:var(--shadow)}
+    h1{margin:0 0 6px; font-size:30px}
+    .meta{color:var(--muted); font-size:14px; margin-bottom:18px}
+    .prose{padding:var(--sec-pad); line-height:1.8}
+    .prose h2{margin:22px 0 8px; font-size:22px}
+    .prose h3{margin:18px 0 6px; font-size:18px}
+    .notice{padding:12px 16px; border:1px dashed #2b3550; border-radius:12px; background:#0f1420; margin-bottom:16px}
+    footer{margin:28px 0 8px; color:#9db0d0; display:flex; justify-content:space-between; font-size:13px}
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div><a href="index.html">← 返回首頁</a></div>
-      <strong>PocketEditor</strong>
+      <div class="logo">
+        <img src="/pockitEdit/assets/logo-pocketeditor-transparent.png?v=12" alt="pockitEdit">
+        <strong>pockitEdit</strong>
+      </div>
+      <div>
+        <a class="btn" href="/pockitEdit/">回首頁</a>
+        <a class="btn" href="/pockitEdit/privacy.html">隱私權政策</a>
+        <a class="btn" href="#" onclick="window.print();return false;">列印</a>
+      </div>
     </header>
 
-    <div class="card">
+    <section class="card prose">
       <h1>最終用戶授權合約（EULA）</h1>
-      <div class="muted">最後更新：2025-09-19</div>
-      <p><strong>重要：</strong>在安裝、複製或使用 <strong>PocketEditor</strong>（以下稱「本軟體」）之前，請先閱讀本合約。安裝或使用即表示您同意受其拘束。若您不同意，請勿安裝或使用本軟體。</p>
+      <div class="meta">最後更新：2025-10-01　|　適用於 pockitEdit 軟體與附屬元件。</div>
+
+      <div class="notice">
+        安裝、下載、存取或使用本軟體，即表示您同意受本 EULA 約束。若您不同意，請勿安裝或使用，並刪除所有副本。
+      </div>
 
       <h2>1. 授權授與</h2>
-      <ul>
-        <li>我們授與您一個<strong>非專屬、不可轉讓、可撤銷</strong>之授權，於單一使用者裝置上安裝與使用本軟體。</li>
-        <li>在遵守本合約與適用法之前提下，您可使用本軟體處理、製作與發佈您的影音內容（輸出成果之權利歸屬於您，惟仍須遵守第三方權利與法令）。</li>
-        <li>本授權不賦予您對本軟體之任何所有權或智慧財產權。</li>
-      </ul>
+      <p>在您遵守本 EULA 前提下，pockitEdit 授予您一項非獨占、不可轉讓、可撤回之授權，以於您擁有或控制的 Windows 裝置上安裝與使用本軟體。若為付費方案或團隊/企業授權，使用席次、裝置數或功能以您購買之方案為準。</p>
 
       <h2>2. 使用限制</h2>
       <ul>
-        <li>不得對本軟體進行逆向工程、反編譯、反組譯，除非適用法明確允許且僅在其範圍內。</li>
-        <li>不得轉售、出租、出借、轉授權或以任何方式散布本軟體。</li>
-        <li>不得移除或變更任何權利聲明、商標或授權標示。</li>
-        <li>不得以違法、侵權或有害之方式使用本軟體。</li>
+        <li>不得進行逆向工程、反編譯、反組譯、嘗試取得原始碼（法律另有明文允許者除外）。</li>
+        <li>不得移除、修改任何著作權、商標或其他權利聲明。</li>
+        <li>不得出租、出借、轉授權或以服務代工方式，讓未被授權之第三人使用。</li>
+        <li>不得以違法、侵權、散布惡意程式或侵害他人權益之方式使用本軟體。</li>
       </ul>
 
-      <h2>3. 試用 / Beta 條款</h2>
-      <ul>
-        <li>若本軟體以「封測」或「測試版」提供，功能可能變更、暫停或終止，並可能包含錯誤或不完整之功能。</li>
-        <li>請自行備份資料與素材。我們對於由於測試版缺陷所導致之資料遺失或損害不承擔責任。</li>
-        <li>本軟體預設不包含遙測；若未來需收集匿名使用資訊，我們將依隱私權政策說明並取得您的同意。</li>
-      </ul>
+      <h2>3. 擁有權</h2>
+      <p>本軟體由其著作權人與授權方擁有所有權與智慧財產權。本 EULA 僅授與使用授權，不移轉所有權。</p>
 
-      <h2>4. 開源元件與第三方服務</h2>
-      <p>本軟體包含或相依若干開源元件（例如 FFmpeg、MoviePy、OpenAI Whisper 等）。該等元件依其各自之授權條款提供，並可能賦予您額外權利；如本合約與第三方授權條款有衝突，以第三方授權條款為準。第三方服務（例如 GitHub Releases 下載）亦受其服務條款與隱私政策拘束。</p>
+      <h2>4. 第三方與開源元件</h2>
+      <p>本軟體可能使用第三方或開放原始碼元件（例如 MoviePy、FFmpeg、Whisper 等）。該等元件依其各自之授權條款使用；必要時我們將於「關於」或隨附檔案中附上授權聲明與原始碼連結。</p>
 
-      <h2>5. 智慧財產權</h2>
-      <p>本軟體及其所有複本、改良與衍生著作之所有權、著作權與其他智慧財產權，均屬於我們或其授權人所有。除本合約明示授權外，未授與任何默示授權。</p>
+      <h2>5. 更新與變更</h2>
+      <p>我們可能提供更新、修補或新功能。除另有說明外，更新亦受本 EULA 約束。部分更新可能自動進行。</p>
 
       <h2>6. 使用者內容</h2>
-      <p>您保留您素材與輸出結果之所有權。您應確保對所使用之素材具有必要之權利與授權，並自行負責遵守第三方授權、肖像權、隱私權與適用法令。</p>
+      <p>您對於使用本軟體處理的素材、輸出與內容保有權利與責任。您保證對素材擁有合法權限，且使用不侵害第三人權利。</p>
 
-      <h2>7. 更新與支援</h2>
-      <p>我們可能不定期提供更新、修補或新版本。除非另有書面約定，更新不保證相容性或持續提供。技術支援依實際資源與政策提供。</p>
+      <h2>7. 資料與遙測</h2>
+      <p>預設情況下，pockitEdit 於本機離線運作，不會自動上傳您的媒體或輸出。若您自願回傳錯誤報告或啟用雲端服務，相關資料之處理方式依 <a href="/pockitEdit/privacy.html">隱私權政策</a> 規範。</p>
 
-      <h2>8. 免責與無保固</h2>
-      <p>本軟體係以 <strong>「現狀」</strong>（AS IS）與 <strong>「可用時」</strong>（AS AVAILABLE）提供，不附任何明示或默示之保固，包括但不限於適售性、特定目的適用性與不侵權之保證。</p>
+      <h2>8. 免責聲明</h2>
+      <p>本軟體係依「現狀」及「可用性」提供，不作任何明示或默示擔保，包括但不限於適售性、特定目的適用性、非侵權等。您應自行承擔使用風險。</p>
 
       <h2>9. 責任限制</h2>
-      <p>在法律允許的最大範圍內，我們對任何間接、附帶、特別、懲罰性或衍生性損害不負責，包括但不限於利潤損失、資料遺失或商業中斷。對於任何直接損害，我們的總責任以您於前 12 個月就本軟體實際支付之費用為上限；若您無需支付費用，該上限為新臺幣 1,000 元。</p>
+      <p>在法律允許範圍內，pockitEdit 對於任何間接性、附隨性、特別、懲罰性或衍生性損害不負責任；對於直接損害之總責任額，以您就本軟體實際支付之對價為上限（若為免費方案則為新臺幣 0 元）。</p>
 
-      <h2>10. 終止</h2>
-      <p>若您違反本合約，我們得終止授權且無需另行通知。終止後，您應停止使用並刪除所有本軟體複本。本合約中依其性質應繼續有效之條款（例如智慧財產權、免責、責任限制等）於終止後仍然有效。</p>
+      <h2>10. 賠償</h2>
+      <p>您同意因違反本 EULA、侵權或違法使用而導致之第三方主張，對 pockitEdit 及其關係企業、員工與合作夥伴提供抗辯與賠償。</p>
 
-      <h2>11. 出口管制與制裁</h2>
-      <p>您同意遵守所有適用之出口管制、再出口與經濟制裁法規。您不得在相關法規禁止之地區、實體或個人使用或轉讓本軟體。</p>
+      <h2>11. 終止</h2>
+      <p>一旦您違反本 EULA 或我們基於任何合法理由終止授權，您的使用權將立即終止；您應停止使用並刪除所有副本。終止不影響一方既存之求償權。</p>
 
-      <h2>12. 準據法與管轄</h2>
-      <p>本合約受 <strong>中華民國（臺灣）</strong> 法律管轄並依其解釋；如有爭議，以臺灣臺北地方法院為第一審管轄法院。若您係消費者，且適用法另為強制規定者，從其規定。</p>
+      <h2>12. 出口管制與制裁</h2>
+      <p>您保證遵守適用之出口管制與經濟制裁法規，不得將本軟體輸出或提供予受限制之國家與對象。</p>
 
-      <h2>13. 一般條款</h2>
+      <h2>13. 準據法與爭議解決</h2>
+      <p>本 EULA 準據法以您主要居所地之強制性法規為限；在不與強制法衝突下，補充以中華民國（臺灣）法律為準據。爭議由臺灣臺北地方法院為第一審管轄法院（或依強制法另行指定）。</p>
+
+      <h2>14. 其他</h2>
       <ul>
-        <li>本合約構成您與我們就本軟體之完整協議，並取代先前之任何口頭或書面約定。</li>
-        <li>若本合約任何條款被認定無效，其餘條款仍具完全效力。</li>
-        <li>未行使或延遲行使任何權利，不構成權利之拋棄。</li>
-        <li>未經我們書面同意，您不得轉讓本合約或其任何權利義務。</li>
+        <li>若本 EULA 任一條款被認定無效，其餘條款仍有效。</li>
+        <li>未行使任何權利，不視為權利之拋棄。</li>
+        <li>我們得於網站公告更新本 EULA；重大變更將另行提示。</li>
       </ul>
 
-      <h2>14. 聯絡我們</h2>
-      <p>關於本合約之問題，請來信：<a href="mailto:support@pocketeditor.app">support@pocketeditor.app</a>（可改為您的正式信箱）。</p>
-    
-      <h2>15. 版本與授權範圍</h2>
-      <ul>
-        <li><strong>個人封測（免費）：</strong>僅供個人評估與非商業用途。任何直接或間接營利活動（如代工、接案、廣告變現）請改用付費授權。</li>
-        <li><strong>個人 Pro：</strong>允許個人商業使用（包含接案與自媒體變現）。不得轉讓或共用帳號。</li>
-        <li><strong>商用／團隊版：</strong>以「席次（Seat）」授權，<em>每席對應單一自然人</em>。可在同一使用者的最多 2 台裝置安裝，但不得同時由不同人使用。</li>
-      </ul>
+      <h2>15. 聯絡方式</h2>
+      <p>授權與商務洽詢：<a href="mailto:hello@smartcut.app">hello@smartcut.app</a></p>
 
-      <h2>16. 帳號、啟用與席次管理</h2>
-      <ul>
-        <li>可能需要以電子郵件／金鑰進行啟用與驗證；您應妥善保管，不得出租、出借或分享。</li>
-        <li>席次可在授權期內按我們的政策移轉一次；超出次數或異常使用得遭停權。</li>
-        <li>若我們偵測到未經授權之使用（含自動化破解），得暫停或終止授權。</li>
-      </ul>
+      <p style="margin-top:16px;color:#9db0d0;font-size:13px">（本頁範本僅供參考，不構成法律意見。若您的使用情境涉商業或大量部署，建議諮詢律師調整條款。）</p>
+    </section>
 
-      <h2>17. 訂閱、付款與退費</h2>
-      <ul>
-        <li>付費版本可能採訂閱制並自動續約；您可於週期結束前取消，取消後效期至當期結束。</li>
-        <li>除法令或通路規範另有規定外，恕不提供已使用期間之比例退費。</li>
-        <li>稅費、跨境手續費由購買方自理，除非結帳頁另有標示。</li>
-      </ul>
-
-      <h2>18. 自動更新與網路連線</h2>
-      <ul>
-        <li>本軟體可在離線狀態下運作；惟為檢查更新或下載元件時可能需連線（例如從 GitHub 取得檔案）。</li>
-        <li>我們可能推送修補與更新以提升安全性與相容性；您同意接收此等更新。</li>
-      </ul>
-
-      <h2>19. 編解碼器與專利聲明</h2>
-      <p>本軟體透過 FFmpeg 等工具處理影音。就特定編解碼器（如 H.264/HEVC）涉及之專利或授權費，您應自行確認並取得必要授權。我們不就任何第三方專利或授權費承擔責任。</p>
-
-      <h2>20. 企業／資料處理</h2>
-      <ul>
-        <li>如您購買商用或企業授權且涉及委託處理個人資料，我們可提供資料處理附約（DPA）或保密協議（NDA）。</li>
-        <li>除非另有書面約定，我們不會接收您的素材；您提供之任何資料僅用於支援與履約目的。</li>
-      </ul>
-
-      <h2>21. 條款變更</h2>
-      <p>我們得於官網公布修訂後之 EULA；修訂發布後您持續使用本軟體，即視為接受變更。我們將保存主要版本之存檔以供查閱。</p>
-
-      <h2>附錄 A．開源元件與授權</h2>
-      <p>下列為主要相依元件（非完整清單）：</p>
-      <ul>
-        <li>FFmpeg — GPL/LGPL（依建置方式而定）：<a href="https://ffmpeg.org/legal.html" target="_blank" rel="noopener">legal</a></li>
-        <li>MoviePy — MIT：<a href="https://github.com/Zulko/moviepy" target="_blank" rel="noopener">repo</a></li>
-        <li>Whisper — MIT：<a href="https://github.com/openai/whisper" target="_blank" rel="noopener">repo</a></li>
-        <li>其他 Python 套件：請見我們的 <code>THIRD-PARTY-LICENSES.txt</code> 或專案頁。</li>
-      </ul>
-
-      <h2>附錄 B．名詞定義</h2>
-      <ul>
-        <li><strong>商業使用：</strong>任何直接或間接以營利為目的之使用（包含但不限於接案、廣告分潤、付費課程、企業內部商務用途）。</li>
-        <li><strong>席次（Seat）：</strong>以單一自然人為使用單位之授權。</li>
-      </ul>
-
-    </div>
+    <footer>
+      <div>© <span id="y"></span> pockitEdit</div>
+      <div>
+        <a href="/pockitEdit/">首頁</a> ·
+        <a href="/pockitEdit/privacy.html">隱私權政策</a>
+      </div>
+    </footer>
   </div>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
