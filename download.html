@@ -5,86 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>pockitEdit — 下載中...</title>
 
-  <!-- Favicons -->
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=15">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=15">
-  <link rel="icon" href="./favicon.ico?v=15" sizes="any" type="image/x-icon">
-  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png?v=15">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; base-uri 'self'; frame-src https://www.youtube-nocookie.com;">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=16">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=16">
+  <link rel="icon" href="./favicon.ico?v=16" sizes="any" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png?v=16">
   <meta name="theme-color" content="#0b0d12" />
 
-  <!-- 預設導向「最新 Release 頁面」（不會 404） -->
+  <!-- 先導向 Releases 頁，不會 404；要直連資產改這行即可 -->
   <meta http-equiv="refresh" content="3;url=https://github.com/martin310365123-byte/pockitEdit/releases/latest">
 
   <style>
-    :root{ --bg:#0b0d12; --card:#10131a; --text:#e8edf7; --muted:#9db0d0; --bd:#1d2330;}
-    body{
-      margin:0;display:flex;align-items:center;justify-content:center;height:100vh;
-      background:var(--bg);color:var(--text);
-      font-family:ui-sans-serif,system-ui,"Microsoft JhengHei UI","Segoe UI",sans-serif;text-align:center
-    }
-    .box{
-      max-width:520px;padding:28px;border-radius:16px;background:var(--card);
-      border:1px solid var(--bd);box-shadow:0 8px 30px rgba(0,0,0,.35)
-    }
-    .logo{margin-bottom:14px}
-    .logo img{height:72px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
-    h1{font-size:24px;margin:0 0 10px}
-    p{color:var(--muted);margin:6px 0}
-    a{color:#8bb3ff}
+    :root{--bg:#0b0d12;--card:#10131a;--text:#e8edf7;--muted:#9db0d0;--bd:#1d2330}
+    body{margin:0;display:flex;align-items:center;justify-content:center;height:100vh;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,"Microsoft JhengHei UI",sans-serif;text-align:center}
+    .box{max-width:520px;padding:28px;border-radius:16px;background:var(--card);border:1px solid var(--bd);box-shadow:0 8px 30px rgba(0,0,0,.35)}
+    .logo{margin-bottom:14px}.logo img{height:72px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+    h1{font-size:24px;margin:0 0 10px} p{color:var(--muted);margin:6px 0} a{color:#8bb3ff}
   </style>
 </head>
 <body>
   <div class="box">
-    <div class="logo">
-      <!-- 加上 id 才能讓 fallback 腳本接手 -->
-      <img id="site-logo" src="./assets/logo-pockitEdit-1024.png?v=16" alt="pockitEdit">
-    </div>
+    <div class="logo"><img id="site-logo" src="./assets/logo-pockitEdit-1024.png?v=16" alt="pockitEdit"></div>
     <h1>正在準備下載…</h1>
     <p>3 秒後將前往 GitHub Release 頁面。</p>
     <p>若沒有自動跳轉，請點這裡：<br>
-      <a href="https://github.com/martin310365123-byte/pockitEdit/releases/latest">前往最新 Release</a>
+      <a href="https://github.com/martin310365123-byte/pockitEdit/releases/latest" target="_blank" rel="noopener noreferrer">前往最新 Release</a>
     </p>
   </div>
 
-  <!--（可選）GA 事件 -->
-  <!--
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <!-- Logo Fallback -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-    gtag('event', 'download_page_view', { event_category: 'Download', event_label: 'Release latest' });
-  </script>
-  -->
-
-  <!-- Logo 自動補救（fallback）：與首頁同版 -->
-  <script>
-  (function(){
-    const img = document.getElementById('site-logo');
-    if(!img) return;
-
-    const candidates = [
-      './assets/logo-pockitEdit-1024.png?v=16',  // 同層 assets（先換版本參數逼快取）
-      './assets/logo-pockitEdit-1024.png',
-      '../assets/logo-pockitEdit-1024.png?v=16', // 若網站根在 docs/、圖片放 repo 根層
-      '../assets/logo-pockitEdit-1024.png',
-      './assets/logo-pocketeditor-transparent.png', // 舊檔名/全小寫備援
-      '../assets/logo-pocketeditor-transparent.png',
-      './logo-pockitEdit-1024.png',               // 放錯到同層時
-      '../logo-pockitEdit-1024.png'
-    ];
-
-    let i = 0;
-    img.addEventListener('error', function onErr(){
-      if (i < candidates.length){
-        img.src = candidates[i++];
-      } else {
-        img.removeEventListener('error', onErr);
-        console.warn('Logo 無法載入：請確認 assets 路徑與檔名大小寫。');
-      }
-    });
-  })();
+  (function(){const img=document.getElementById('site-logo');if(!img)return;const t=['./assets/logo-pockitEdit-1024.png?v=16','./assets/logo-pockitEdit-1024.png','../assets/logo-pockitEdit-1024.png?v=16','../assets/logo-pockitEdit-1024.png','./logo-pockitEdit-1024.png','../logo-pockitEdit-1024.png'];let i=0;img.addEventListener('error',function onErr(){if(i<t.length){img.src=t[i++];}else img.removeEventListener('error',onErr);});})();
   </script>
 </body>
 </html>
