@@ -6,18 +6,17 @@
   <title>pockitEdit — 官方網站</title>
   <meta name="description" content="pockitEdit：Windows 上的 AI 自動剪輯工具。去無聲段、字幕自動生成與硬燒、隨機 BGM + Ducking、一鍵合成。" />
 
-  <!-- Favicons（相對路徑；v=14 破快取） -->
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=14">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=14">
-  <link rel="icon" href="./favicon.ico?v=14" sizes="any" type="image/x-icon">
-  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png?v=14">
+  <!-- Favicons（相對路徑；v=15 破快取） -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=15">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=15">
+  <link rel="icon" href="./favicon.ico?v=15" sizes="any" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png?v=15">
   <meta name="theme-color" content="#0b0d12" />
 
-  <!-- Social preview（相對路徑） -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="pockitEdit — 官方網站">
   <meta property="og:description" content="AI 自動剪輯：去無聲、字幕、BGM Ducking、一鍵合成。">
-  <meta property="og:image" content="./assets/og-image.jpg?v=14">
+  <meta property="og:image" content="./assets/og-image.jpg?v=15">
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -27,17 +26,14 @@
       --acc:#8be58b; --acc2:#8bb3ff; --bd:#1d2330; --radius:16px;
       --shadow:0 10px 30px rgba(0,0,0,.25);
       --logo-size: clamp(56px, 7vw, 112px);
-      --sec-pad: 28px; /* .section padding（給影片貼齊時用） */
+      --sec-pad: 28px;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
-      margin:0;
-      font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","Microsoft JhengHei UI","PingFang TC",sans-serif;
-      background:
-        radial-gradient(1200px 600px at 20% -10%,#162034,transparent),
-        radial-gradient(1000px 500px at 120% 10%,#19223a,transparent),
-        var(--bg);
+      margin:0;font-family:ui-sans-serif,system-ui,"Microsoft JhengHei UI",sans-serif;
+      background:radial-gradient(1200px 600px at 20% -10%,#162034,transparent),
+                 radial-gradient(1000px 500px at 120% 10%,#19223a,transparent),
+                 var(--bg);
       color:var(--text)
     }
     a{color:var(--acc2);text-decoration:none}
@@ -52,25 +48,25 @@
     .btn{
       display:inline-block;padding:12px 18px;border-radius:12px;
       background:linear-gradient(135deg,var(--acc2),#6fe3ff);
-      color:#0b1220;font-weight:700;
-      box-shadow:0 8px 20px rgba(111,227,255,.25);
+      color:#0b1220;font-weight:700;box-shadow:0 8px 20px rgba(111,227,255,.25);
       border:1px solid rgba(255,255,255,.08);cursor:pointer
     }
     .btn.secondary{background:#1a2233;color:var(--text);border:1px solid #2b3550}
-    .btn[disabled]{opacity:.55;cursor:not-allowed}
 
     .hero{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:center;margin-top:24px}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--bd);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+          border:1px solid var(--bd);border-radius:var(--radius);box-shadow:var(--shadow)}
     .hero .copy{padding:36px}
     h1{font-size:clamp(42px, 6.2vw, 76px);line-height:1.12;margin:0 0 14px}
     p.lead{font-size:18px;color:var(--muted);margin:0 0 22px}
     .badges{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 22px}
     .badge{padding:6px 10px;border:1px solid #2b3550;border-radius:999px;font-size:13px;color:#cfe0ff;background:#151c2a}
     .hero .mock{padding:24px}
-    .mockbox{border-radius:18px;background:#0c111b;border:1px solid #232b3d;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03),0 10px 30px rgba(0,0,0,.35);padding:18px}
+    .mockbox{border-radius:18px;background:#0c111b;border:1px solid #232b3d;
+             box-shadow:inset 0 0 0 1px rgba(255,255,255,.03),0 10px 30px rgba(0,0,0,.35);padding:18px}
     .windowbar{display:flex;gap:8px;margin-bottom:10px}
     .dot{width:10px;height:10px;border-radius:50%;background:#2f3a53}
-    pre{margin:0;white-space:pre-wrap;word-break:break-word;font-size:13.5px;line-height:1.55;color:#c9d7ff}
+    pre{margin:0;font-size:13.5px;line-height:1.55;color:#c9d7ff;white-space:pre-wrap}
 
     .sections{display:grid;gap:18px;margin-top:28px}
     .section{padding:var(--sec-pad)}
@@ -89,54 +85,28 @@
     .faq dt{font-weight:700;margin:12px 0 6px}
     .faq dd{margin:0 0 10px;color:#cfe0ff}
     footer{margin:40px 0 20px;color:#9db0d0;font-size:13px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
-    footer nav a{margin:0 12px 0 0}
 
-    /* 影片「貼齊外框」：吃掉 .section 的左右 padding */
-    .edge-to-border{
-      margin-left: calc(-1 * var(--sec-pad));
-      margin-right: calc(-1 * var(--sec-pad));
-      width: calc(100% + (var(--sec-pad) * 2));
-      border-radius: 14px;
-      overflow: hidden;                 /* 裁掉圓角外溢 */
-      border: 1px solid var(--bd);      /* 保留卡片的邊線視覺 */
-      background:#0c111b;
-    }
-    .video-iframe{
-      display:block;
-      width:100%;
-      aspect-ratio:16/9;                 /* 想更「電影感」可改 21/9 */
-      border:0;
-    }
+    .edge-to-border{margin-left:calc(-1 * var(--sec-pad));margin-right:calc(-1 * var(--sec-pad));
+                    width:calc(100% + (var(--sec-pad) * 2));border-radius:14px;overflow:hidden;
+                    border:1px solid var(--bd);background:#0c111b}
+    .video-iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
 
     /* Consent Modal */
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(8,12,20,.6);backdrop-filter:blur(4px);z-index:9999}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+           background:rgba(8,12,20,.6);backdrop-filter:blur(4px);z-index:9999}
     .modal.show{display:flex}
-    .dialog{width:min(680px,calc(100% - 40px));background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+    .dialog{width:min(680px,calc(100% - 40px));background:var(--card);border:1px solid var(--bd);
+            border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
     .dialog h3{margin:0 0 6px}
     .dialog .muted{font-size:14px}
     .dialog .actions{display:flex;justify-content:flex-end;gap:10px;margin-top:14px}
-    .close-x{position:absolute;right:14px;top:10px;border:none;background:transparent;color:#9db0d0;font-size:22px;cursor:pointer}
-
-    @media (max-width:1000px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr 1fr}
-      .how{grid-template-columns:1fr 1fr}
-      .pricing{grid-template-columns:1fr}
-    }
-    @media (max-width:640px){
-      .grid{grid-template-columns:1fr}
-      .how{grid-template-columns:1fr}
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div class="logo" aria-label="pockitEdit">
-        <!-- 只保留圖示 -->
-        <img id="site-logo"
-             src="./assets/logo-pockitEdit-1024.png?v=14"
-             alt="pockitEdit" class="logo-img" loading="eager">
+      <div class="logo">
+        <img id="site-logo" src="./assets/logo-pockitEdit-1024.png?v=15" alt="pockitEdit" class="logo-img" loading="eager">
       </div>
       <nav>
         <a href="#features">功能</a>
@@ -144,7 +114,8 @@
         <a href="#pricing">方案</a>
         <a href="#faq">常見問題</a>
         <a href="#video">教學影片</a>
-        <button class="btn" id="download" data-need-consent data-href="https://github.com/martin310365123-byte/pockitEdit/releases/latest">下載</button>
+        <!-- 改成導向 download.html -->
+        <button class="btn" id="download" data-need-consent data-href="./download.html">下載</button>
       </nav>
     </header>
 
@@ -158,24 +129,14 @@
           <span class="badge">Whisper STT</span>
         </div>
         <div class="cta">
-          <button class="btn" id="download-hero" data-need-consent data-href="https://github.com/martin310365123-byte/pockitEdit/releases/latest">下載封測版</button>
+          <button class="btn" data-need-consent data-href="./download.html">下載封測版</button>
           <a class="btn secondary" href="https://github.com/martin310365123-byte/pockitEdit/issues/new/choose">回報問題 / 提案</a>
         </div>
       </div>
-      <div class="mock card" aria-hidden="true">
+      <div class="mock card">
         <div class="mockbox">
           <div class="windowbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-<pre>$ pockitedit run \
-  --process-all \
-  --stt --stt-model small --stt-device cpu --stt-compute int8 \
-  --lang zh \
-  --fontname "Microsoft JhengHei UI" --fontsize 28 --marginv 40 \
-  --concat --concat-which burnin \
-  --music-dir "C:\Users\user\AI Editor\music" \
-  --post-bgm-vol 0.12 \
-  --subs-cps 18 --subs-min-dur 1.2 --subs-max-dur 5.0 --subs-merge-gap 0.4
-
-▶ 去無聲處理   ▶ 產生字幕   ▶ 自動上字   ▶ 音樂配平   ▶ 合成輸出
+<pre>$ pockitedit run --process-all --stt --stt-model small ...
 ✅ Done: output/final.mp4</pre>
         </div>
       </div>
@@ -185,60 +146,25 @@
       <section id="features" class="section card">
         <h2>核心功能</h2>
         <div class="grid">
-          <div class="feat"><h3>去無聲段</h3><p>偵測長時間靜音，自動裁切空白片段，讓敘事更緊湊。</p></div>
-          <div class="feat"><h3>字幕自動生成</h3><p>Whisper STT 轉文字，支援繁中與時間碼修飾，CPS/最短/最長持續時間可調。</p></div>
-          <div class="feat"><h3>硬燒與樣式</h3><p>內建字型、大小、邊距設定，避免跳脫字與亂碼。</p></div>
-          <div class="feat"><h3>隨機 BGM + Ducking</h3><p>自動挑選音樂並在人聲時段降低音量，維持語音清晰。</p></div>
-          <div class="feat"><h3>一鍵合成</h3><p>MoviePy + FFmpeg 串接輸出，簡化繁瑣步驟。</p></div>
-          <div class="feat"><h3>可離線運作</h3><p>在本機 Windows 執行，適合長片與內網環境。</p></div>
+          <div class="feat"><h3>去無聲段</h3><p>偵測長時間靜音，自動裁切空白片段。</p></div>
+          <div class="feat"><h3>字幕自動生成</h3><p>Whisper STT 轉文字，支援繁中與時間碼修飾。</p></div>
+          <div class="feat"><h3>硬燒與樣式</h3><p>內建字型、大小、邊距設定。</p></div>
+          <div class="feat"><h3>隨機 BGM + Ducking</h3><p>自動挑選音樂並在人聲時段降低音量。</p></div>
+          <div class="feat"><h3>一鍵合成</h3><p>MoviePy + FFmpeg 串接輸出。</p></div>
+          <div class="feat"><h3>可離線運作</h3><p>適合長片與內網環境。</p></div>
         </div>
       </section>
 
       <section id="how" class="section card">
         <h2>如何使用</h2>
-
-        <!-- 教學影片：貼齊外框 -->
         <h3 id="video" style="margin-top:4px">教學影片</h3>
         <div class="edge-to-border" style="margin-top:12px">
-          <iframe
-            class="video-iframe"
+          <iframe class="video-iframe"
             src="https://www.youtube-nocookie.com/embed/4ekbRZQI_HQ?rel=0&modestbranding=1&playsinline=1"
-            title="pockitEdit 使用教學"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-            loading="lazy">
+            title="pockitEdit 使用教學" allowfullscreen loading="lazy">
           </iframe>
         </div>
-        <p class="muted" style="margin:10px 0 0">
-          若無法播放，<a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ" target="_blank" rel="noopener">改在 YouTube 開啟</a>
-        </p>
-
-        <!-- 簡易步驟 -->
-        <div class="how" style="margin-top:18px">
-          <div class="step"><strong>1. 準備素材</strong><br>將影片丟入 <code>input/</code> 資料夾。</div>
-          <div class="step"><strong>2. 設定參數</strong><br>依需求調整字幕 CPS、最短/最長顯示等。</div>
-          <div class="step"><strong>3. 執行</strong><br>點選批次檔或於 CLI 下指令。</div>
-          <div class="step"><strong>4. 輸出成片</strong><br>完成後會出現在 <code>output/</code>。</div>
-        </div>
-      </section>
-
-      <section id="pricing" class="section card">
-        <h2>方案（暫定）</h2>
-        <div class="pricing">
-          <div class="price-card"><h4>個人封測</h4><div class="price">Free</div><ul><li>基本去無聲 + 字幕 + BGM</li><li>社群支援</li></ul></div>
-          <div class="price-card"><h4>個人 Pro</h4><div class="price">NT$ 490 / 月</div><ul><li>高品質 STT 模型</li><li>批次處理與佇列</li><li>優先支援</li></ul></div>
-          <div class="price-card"><h4>商用</h4><div class="price">洽談</div><ul><li>團隊授權</li><li>離線企業版</li><li>客製功能</li></ul></div>
-        </div>
-      </section>
-
-      <section id="faq" class="section card">
-        <h2>常見問題</h2>
-        <dl class="faq">
-          <dt>需要網路嗎？</dt><dd>不需要。pockitEdit 可於 Windows 本機離線執行。</dd>
-          <dt>字幕亂碼怎麼辦？</dt><dd>請使用「Microsoft JhengHei UI」或其他含中文字型。</dd>
-          <dt>是否支援 GUI？</dt><dd>目前為 CLI，後續會推出 GUI 測試版。</dd>
-        </dl>
+        <p class="muted">若無法播放，<a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ" target="_blank">改在 YouTube 開啟</a></p>
       </section>
     </div>
 
@@ -252,118 +178,60 @@
     </footer>
   </div>
 
-  <!-- 強制刷新 favicon（處理瀏覽器快取頑固，可保留） -->
-  <script>
-    (function refreshFavicons(){
-      const v = Date.now().toString();
-      document.querySelectorAll('link[rel~="icon"],link[rel="shortcut icon"]').forEach(link=>{
-        try{
-          const url = new URL(link.href, location.href);
-          url.searchParams.set('v', v);
-          link.href = url.pathname + '?' + url.searchParams.toString();
-        }catch(e){}
-      });
-    })();
-  </script>
-
-  <!-- 安裝同意書（每次詢問） -->
-  <div id="consent-modal" class="modal" hidden style="display:none" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="dialog" role="document" style="position:relative">
-      <button class="close-x" id="consent-close" aria-label="關閉">×</button>
+  <!-- Consent Modal -->
+  <div id="consent-modal" class="modal" hidden>
+    <div class="dialog">
       <h3>安裝同意書</h3>
-      <p class="muted">下載前，請閱讀並同意 <a href="./eula.html" target="_blank" rel="noopener">最終用戶授權合約（EULA）</a> 與
-        <a href="./privacy.html" target="_blank" rel="noopener">隱私權政策</a>。您也可保留一份副本。</p>
-      <label style="display:flex;gap:8px;align-items:flex-start;margin-top:10px">
-        <input type="checkbox" id="consent-check" style="margin-top:4px">
-        <span>我已閱讀並同意上述條款，且年滿法定年齡。</span>
-      </label>
+      <p class="muted">請閱讀並同意 <a href="./eula.html" target="_blank">EULA</a> 與 <a href="./privacy.html" target="_blank">隱私權政策</a>。</p>
+      <label><input type="checkbox" id="consent-check"> 我已閱讀並同意</label>
       <div class="actions">
         <button class="btn secondary" id="consent-cancel">不同意</button>
         <button class="btn" id="consent-agree" disabled>同意並下載</button>
       </div>
-      <p class="muted" style="margin-top:6px">此同意不會被記錄，您每次下載都會再次看到本提示。</p>
+      <p class="muted">此同意不會被記錄，每次下載都會再次看到本提示。</p>
     </div>
   </div>
 
-  <noscript>
-    <div style="margin:12px 0;padding:12px;border:1px solid #b00;color:#b00;background:#fff3f3;border-radius:8px">
-      您的瀏覽器已停用 JavaScript，因此無法顯示安裝同意書與下載按鈕。
-      請先啟用 JavaScript，或直接前往
-      <a href="https://github.com/martin310365123-byte/pockitEdit/releases/latest" rel="noopener">GitHub Releases</a>
-      下載（請先閱讀並遵循 EULA/隱私權政策）。
-    </div>
-  </noscript>
-
   <script>
-    // 年份
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // 同意書（每次詢問）
+    document.getElementById('y').textContent=new Date().getFullYear();
     (function(){
-      const modal     = document.getElementById('consent-modal');
-      const agreeBtn  = document.getElementById('consent-agree');
-      const cancelBtn = document.getElementById('consent-cancel');
-      const closeX    = document.getElementById('consent-close');
-      const checkbox  = document.getElementById('consent-check');
-
-      let pendingUrl = null;
-
-      function openModal(url){
-        pendingUrl = url; checkbox.checked = false; agreeBtn.disabled = true;
-        modal.removeAttribute('hidden');
-        modal.style.display = 'flex';
-        modal.classList.add('show');
-        modal.setAttribute('aria-hidden','false');
-      }
-      function closeModal(){
-        modal.classList.remove('show');
-        modal.setAttribute('aria-hidden','true');
-        modal.style.display = 'none';
-        modal.setAttribute('hidden','');
-        pendingUrl = null;
-      }
-
-      checkbox.addEventListener('change', ()=>{ agreeBtn.disabled = !checkbox.checked; });
-      cancelBtn.addEventListener('click', closeModal);
-      closeX.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
-
-      function bindButton(btn){
-        if(!btn || btn.dataset.consentBound==='1') return;
-        const url = btn.getAttribute('data-href');
-        if(!url) return;
-        btn.addEventListener('click', (e)=>{ e.preventDefault(); openModal(url); }, true);
-        btn.addEventListener('pointerdown', (e)=>{ e.preventDefault(); }, true);
-        btn.dataset.consentBound = '1';
-      }
-      document.querySelectorAll('button[data-need-consent]').forEach(bindButton);
-
-      agreeBtn.addEventListener('click', ()=>{
-        if(checkbox.checked && pendingUrl){
-          const url = pendingUrl; closeModal(); window.location.assign(url);
-        }
+      const modal=document.getElementById('consent-modal');
+      const agree=document.getElementById('consent-agree');
+      const cancel=document.getElementById('consent-cancel');
+      const check=document.getElementById('consent-check');
+      let url=null;
+      function open(u){url=u;check.checked=false;agree.disabled=true;modal.style.display='flex';}
+      function close(){modal.style.display='none';url=null;}
+      check.addEventListener('change',()=>agree.disabled=!check.checked);
+      cancel.addEventListener('click',close);
+      document.querySelectorAll('[data-need-consent]').forEach(btn=>{
+        btn.addEventListener('click',e=>{e.preventDefault();open(btn.getAttribute('data-href'));});
       });
+      agree.addEventListener('click',()=>{if(check.checked&&url){window.location=url;close();}});
     })();
   </script>
   <script>
+/* 若主路徑失敗，自動嘗試幾個常見路徑/檔名/大小寫組合 */
 (function(){
   const img = document.getElementById('site-logo');
   if(!img) return;
-  const tries = [
+  const candidates = [
     './assets/logo-pockitEdit-1024.png?v=15',
-    './assets/logo-pockitEdit-1024.png',          // 去掉版本參數
-    './assets/logo-pockitedit-1024.png?v=15',     // 全小寫備援
+    './assets/logo-pockitEdit-1024.png',
+    '../assets/logo-pockitEdit-1024.png?v=15',   // 你的站若以 docs/ 為根，但圖片放在 repo 根層 assets
+    '../assets/logo-pockitEdit-1024.png',
     './assets/logo-pocketeditor-transparent.png', // 舊檔名備援
-    './logo-pockitEdit-1024.png?v=15'             // 如果放錯到根層
+    '../assets/logo-pocketeditor-transparent.png',
+    './logo-pockitEdit-1024.png',                 // 放錯在同層
+    '../logo-pockitEdit-1024.png'
   ];
   let i = 0;
   img.addEventListener('error', function onErr(){
-    if (i < tries.length){
-      img.src = tries[i++];
-    } else {
+    if (i < candidates.length){
+      img.src = candidates[i++];
+    }else{
       img.removeEventListener('error', onErr);
-      console.warn('Logo 路徑仍找不到，請檢查 assets/ 位置與檔名大小寫。');
+      console.warn('Logo 仍無法載入，請檢查 assets 位置與檔名大小寫。');
     }
   });
 })();
