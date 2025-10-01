@@ -210,5 +210,43 @@
       agree.addEventListener('click',()=>{if(check.checked&&url){window.location=url;close();}});
     })();
   </script>
+  <script>
+/* 若主路徑失敗，自動嘗試幾個常見路徑/檔名/大小寫組合 */
+(function(){
+  const img = document.getElementById('site-logo');
+  if(!img) return;
+
+  const candidates = [
+    // 同層 assets（先試一次換版本參數，逼快取刷新）
+    './assets/logo-pockitEdit-1024.png?v=16',
+    './assets/logo-pockitEdit-1024.png',
+
+    // 若網站根是 docs/，但圖片不小心放在 repo 根層
+    '../assets/logo-pockitEdit-1024.png?v=16',
+    '../assets/logo-pockitEdit-1024.png',
+
+    // 可能的舊檔名或全小寫誤上傳
+    './assets/logo-pocketeditor-transparent.png',
+    '../assets/logo-pocketeditor-transparent.png',
+    './assets/logo-pockitedit-1024.png',
+    '../assets/logo-pockitedit-1024.png',
+
+    // 放錯到同層（非 assets）時的救援
+    './logo-pockitEdit-1024.png',
+    '../logo-pockitEdit-1024.png'
+  ];
+
+  let i = 0;
+  img.addEventListener('error', function onErr(){
+    if (i < candidates.length){
+      img.src = candidates[i++];
+    }else{
+      img.removeEventListener('error', onErr);
+      console.warn('Logo 仍無法載入，請檢查 assets 位置與檔名大小寫。');
+    }
+  }, { once:false });
+})();
+</script>
+
 </body>
 </html>
