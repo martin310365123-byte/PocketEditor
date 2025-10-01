@@ -6,116 +6,80 @@
   <title>pockitEdit — 官方網站</title>
   <meta name="description" content="pockitEdit：Windows 上的 AI 自動剪輯工具。去無聲段、字幕自動生成與硬燒、隨機 BGM + Ducking、一鍵合成。" />
 
-  <!-- Favicons（相對路徑；v=15 破快取） -->
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=15">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=15">
-  <link rel="icon" href="./favicon.ico?v=15" sizes="any" type="image/x-icon">
-  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png?v=15">
+  <!-- Referrer Policy：不帶來源到外站（含 GitHub/YouTube） -->
+  <meta name="referrer" content="no-referrer">
+
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 img-src 'self' data: https://*.githubusercontent.com;
+                 script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com;
+                 style-src 'self' 'unsafe-inline';
+                 frame-src https://www.youtube-nocookie.com;
+                 connect-src 'self';
+                 base-uri 'self';
+                 form-action 'self';">
+
+  <!-- Favicons（破快取 v=16） -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=16">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=16">
+  <link rel="icon" href="./favicon.ico?v=16" sizes="any" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png?v=16">
   <meta name="theme-color" content="#0b0d12" />
 
+  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="pockitEdit — 官方網站">
   <meta property="og:description" content="AI 自動剪輯：去無聲、字幕、BGM Ducking、一鍵合成。">
-  <meta property="og:image" content="./assets/og-image.jpg?v=15">
+  <meta property="og:image" content="./assets/og-image.jpg?v=16">
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
 
   <style>
-    :root{
-      --bg:#0b0d12; --card:#10131a; --muted:#b7c0d1; --text:#e8edf7;
-      --acc:#8be58b; --acc2:#8bb3ff; --bd:#1d2330; --radius:16px;
-      --shadow:0 10px 30px rgba(0,0,0,.25);
-      --logo-size: clamp(56px, 7vw, 112px);
-      --sec-pad: 28px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;font-family:ui-sans-serif,system-ui,"Microsoft JhengHei UI",sans-serif;
-      background:radial-gradient(1200px 600px at 20% -10%,#162034,transparent),
-                 radial-gradient(1000px 500px at 120% 10%,#19223a,transparent),
-                 var(--bg);
-      color:var(--text)
-    }
-    a{color:var(--acc2);text-decoration:none}
-    a:hover{text-decoration:underline}
-
+    :root{--bg:#0b0d12;--card:#10131a;--muted:#b7c0d1;--text:#e8edf7;--acc2:#8bb3ff;--bd:#1d2330;--radius:16px;--shadow:0 10px 30px rgba(0,0,0,.25);--logo-size:clamp(56px,7vw,112px);--sec-pad:28px}
+    *{box-sizing:border-box} body{margin:0;font-family:ui-sans-serif,system-ui,"Microsoft JhengHei UI",sans-serif;background:radial-gradient(1200px 600px at 20% -10%,#162034,transparent),radial-gradient(1000px 500px at 120% 10%,#19223a,transparent),var(--bg);color:var(--text)}
+    a{color:var(--acc2);text-decoration:none} a:hover{text-decoration:underline}
     .container{max-width:1280px;margin:0 auto;padding:28px}
     header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
-    .logo{display:flex;align-items:center;gap:8px}
     .logo-img{height:var(--logo-size);width:auto;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
-    nav a, nav button{margin-left:20px;opacity:.95}
-
-    .btn{
-      display:inline-block;padding:12px 18px;border-radius:12px;
-      background:linear-gradient(135deg,var(--acc2),#6fe3ff);
-      color:#0b1220;font-weight:700;box-shadow:0 8px 20px rgba(111,227,255,.25);
-      border:1px solid rgba(255,255,255,.08);cursor:pointer
-    }
+    nav a,nav button{margin-left:20px}
+    .btn{display:inline-block;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,var(--acc2),#6fe3ff);color:#0b1220;font-weight:700;border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 20px rgba(111,227,255,.25);cursor:pointer}
     .btn.secondary{background:#1a2233;color:var(--text);border:1px solid #2b3550}
-
-    .hero{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:center;margin-top:24px}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
-          border:1px solid var(--bd);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;margin-top:24px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--bd);border-radius:var(--radius);box-shadow:var(--shadow)}
     .hero .copy{padding:36px}
-    h1{font-size:clamp(42px, 6.2vw, 76px);line-height:1.12;margin:0 0 14px}
+    h1{font-size:clamp(42px,6.2vw,76px);line-height:1.12;margin:0 0 14px}
     p.lead{font-size:18px;color:var(--muted);margin:0 0 22px}
     .badges{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 22px}
     .badge{padding:6px 10px;border:1px solid #2b3550;border-radius:999px;font-size:13px;color:#cfe0ff;background:#151c2a}
-    .hero .mock{padding:24px}
-    .mockbox{border-radius:18px;background:#0c111b;border:1px solid #232b3d;
-             box-shadow:inset 0 0 0 1px rgba(255,255,255,.03),0 10px 30px rgba(0,0,0,.35);padding:18px}
-    .windowbar{display:flex;gap:8px;margin-bottom:10px}
-    .dot{width:10px;height:10px;border-radius:50%;background:#2f3a53}
+    .hero .mock{padding:24px}.mockbox{border-radius:18px;background:#0c111b;border:1px solid #232b3d;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03),0 10px 30px rgba(0,0,0,.35);padding:18px}
+    .windowbar{display:flex;gap:8px;margin-bottom:10px}.dot{width:10px;height:10px;border-radius:50%;background:#2f3a53}
     pre{margin:0;font-size:13.5px;line-height:1.55;color:#c9d7ff;white-space:pre-wrap}
-
-    .sections{display:grid;gap:18px;margin-top:28px}
-    .section{padding:var(--sec-pad)}
+    .sections{display:grid;gap:18px;margin-top:28px}.section{padding:var(--sec-pad)}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .feat{padding:18px;border:1px solid var(--bd);border-radius:14px;background:#0f1420}
-    .feat h3{margin:0 0 6px;font-size:18px}
-    .feat p{margin:0;color:var(--muted)}
-    .how{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-    .step{padding:18px;border:1px dashed #2b3550;border-radius:14px}
-    .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
-    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .price-card{padding:22px;border:1px solid var(--bd);border-radius:16px;background:#0f1420}
-    .price-card h4{margin:0 0 8px}
-    .price{font-size:28px;font-weight:800;margin:8px 0}
-    .muted{color:var(--muted)}
-    .faq dt{font-weight:700;margin:12px 0 6px}
-    .faq dd{margin:0 0 10px;color:#cfe0ff}
-    footer{margin:40px 0 20px;color:#9db0d0;font-size:13px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
-
-    .edge-to-border{margin-left:calc(-1 * var(--sec-pad));margin-right:calc(-1 * var(--sec-pad));
-                    width:calc(100% + (var(--sec-pad) * 2));border-radius:14px;overflow:hidden;
-                    border:1px solid var(--bd);background:#0c111b}
+    .feat{padding:18px;border:1px solid var(--bd);border-radius:14px;background:#0f1420}.feat h3{margin:0 0 6px}.feat p{margin:0;color:var(--muted)}
+    .edge-to-border{margin-left:calc(-1*var(--sec-pad));margin-right:calc(-1*var(--sec-pad));width:calc(100% + var(--sec-pad)*2);border-radius:14px;overflow:hidden;border:1px solid var(--bd);background:#0c111b}
     .video-iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
-
-    /* Consent Modal */
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;
-           background:rgba(8,12,20,.6);backdrop-filter:blur(4px);z-index:9999}
-    .modal.show{display:flex}
-    .dialog{width:min(680px,calc(100% - 40px));background:var(--card);border:1px solid var(--bd);
-            border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
-    .dialog h3{margin:0 0 6px}
-    .dialog .muted{font-size:14px}
-    .dialog .actions{display:flex;justify-content:flex-end;gap:10px;margin-top:14px}
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.price-card{padding:22px;border:1px solid var(--bd);border-radius:16px;background:#0f1420}
+    footer{margin:40px 0 20px;color:#9db0d0;font-size:13px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+    @media(max-width:1000px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}}@media(max-width:640px){.grid{grid-template-columns:1fr}}
+    /* Consent */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(8,12,20,.6);backdrop-filter:blur(4px);z-index:9999}
+    .dialog{width:min(680px,calc(100% - 40px));background:#10131a;border:1px solid #1d2330;border-radius:16px;padding:22px}
+    .dialog .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div class="logo">
-        <img id="site-logo" src="./assets/logo-pockitEdit-1024.png?v=15" alt="pockitEdit" class="logo-img" loading="eager">
-      </div>
+      <img id="site-logo" class="logo-img" src="./assets/logo-pockitEdit-1024.png?v=16" alt="pockitEdit" loading="eager">
       <nav>
         <a href="#features">功能</a>
         <a href="#how">使用方式</a>
         <a href="#pricing">方案</a>
         <a href="#faq">常見問題</a>
         <a href="#video">教學影片</a>
-        <!-- 改成導向 download.html -->
-        <button class="btn" id="download" data-need-consent data-href="./download.html">下載</button>
+        <button class="btn" data-need-consent data-href="./download.html">下載</button>
       </nav>
     </header>
 
@@ -124,13 +88,11 @@
         <h1>AI 自動剪輯，一鍵完成</h1>
         <p class="lead">去無聲段、字幕自動生成與硬燒、隨機 BGM + Ducking、合成輸出。支援中文工作流程，可離線。</p>
         <div class="badges">
-          <span class="badge">Windows / 本機運算</span>
-          <span class="badge">MoviePy + FFmpeg</span>
-          <span class="badge">Whisper STT</span>
+          <span class="badge">Windows / 本機運算</span><span class="badge">MoviePy + FFmpeg</span><span class="badge">Whisper STT</span>
         </div>
         <div class="cta">
           <button class="btn" data-need-consent data-href="./download.html">下載封測版</button>
-          <a class="btn secondary" href="https://github.com/martin310365123-byte/pockitEdit/issues/new/choose">回報問題 / 提案</a>
+          <a class="btn secondary" href="https://github.com/martin310365123-byte/pockitEdit/issues/new/choose" target="_blank" rel="noopener noreferrer">回報問題 / 提案</a>
         </div>
       </div>
       <div class="mock card">
@@ -149,7 +111,7 @@
           <div class="feat"><h3>去無聲段</h3><p>偵測長時間靜音，自動裁切空白片段。</p></div>
           <div class="feat"><h3>字幕自動生成</h3><p>Whisper STT 轉文字，支援繁中與時間碼修飾。</p></div>
           <div class="feat"><h3>硬燒與樣式</h3><p>內建字型、大小、邊距設定。</p></div>
-          <div class="feat"><h3>隨機 BGM + Ducking</h3><p>自動挑選音樂並在人聲時段降低音量。</p></div>
+          <div class="feat"><h3>隨機 BGM + Ducking</h3><p>人聲段自動降低音量。</p></div>
           <div class="feat"><h3>一鍵合成</h3><p>MoviePy + FFmpeg 串接輸出。</p></div>
           <div class="feat"><h3>可離線運作</h3><p>適合長片與內網環境。</p></div>
         </div>
@@ -161,10 +123,29 @@
         <div class="edge-to-border" style="margin-top:12px">
           <iframe class="video-iframe"
             src="https://www.youtube-nocookie.com/embed/4ekbRZQI_HQ?rel=0&modestbranding=1&playsinline=1"
-            title="pockitEdit 使用教學" allowfullscreen loading="lazy">
+            title="pockitEdit 使用教學" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy">
           </iframe>
         </div>
-        <p class="muted">若無法播放，<a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ" target="_blank">改在 YouTube 開啟</a></p>
+        <p class="muted">若無法播放，<a href="https://www.youtube.com/watch?v=4ekbRZQI_HQ" target="_blank" rel="noopener noreferrer">改在 YouTube 開啟</a></p>
+      </section>
+
+      <section id="pricing" class="section card">
+        <h2>方案（暫定）</h2>
+        <div class="pricing">
+          <div class="price-card"><h4>個人封測</h4><p>Free</p></div>
+          <div class="price-card"><h4>個人 Pro</h4><p>NT$ 490 / 月</p></div>
+          <div class="price-card"><h4>商用</h4><p>洽談</p></div>
+        </div>
+      </section>
+
+      <section id="faq" class="section card">
+        <h2>常見問題</h2>
+        <dl class="faq">
+          <dt>需要網路嗎？</dt><dd>不需要。pockitEdit 可於 Windows 本機離線執行。</dd>
+          <dt>字幕亂碼？</dt><dd>建議使用「Microsoft JhengHei UI」或其他中文字型。</dd>
+          <dt>GUI 支援？</dt><dd>目前為 CLI，後續將推出 GUI 測試版。</dd>
+        </dl>
       </section>
     </div>
 
@@ -178,11 +159,11 @@
     </footer>
   </div>
 
-  <!-- Consent Modal -->
+  <!-- 同意書 -->
   <div id="consent-modal" class="modal" hidden>
     <div class="dialog">
       <h3>安裝同意書</h3>
-      <p class="muted">請閱讀並同意 <a href="./eula.html" target="_blank">EULA</a> 與 <a href="./privacy.html" target="_blank">隱私權政策</a>。</p>
+      <p class="muted">請閱讀並同意 <a href="./eula.html">EULA</a> 與 <a href="./privacy.html">隱私權政策</a>。</p>
       <label><input type="checkbox" id="consent-check"> 我已閱讀並同意</label>
       <div class="actions">
         <button class="btn secondary" id="consent-cancel">不同意</button>
@@ -194,59 +175,28 @@
 
   <script>
     document.getElementById('y').textContent=new Date().getFullYear();
-    (function(){
-      const modal=document.getElementById('consent-modal');
-      const agree=document.getElementById('consent-agree');
-      const cancel=document.getElementById('consent-cancel');
-      const check=document.getElementById('consent-check');
-      let url=null;
-      function open(u){url=u;check.checked=false;agree.disabled=true;modal.style.display='flex';}
+    (function(){ // 同意書
+      const modal=document.getElementById('consent-modal'),agree=document.getElementById('consent-agree'),cancel=document.getElementById('consent-cancel'),chk=document.getElementById('consent-check');let url=null;
+      function open(u){url=u;chk.checked=false;agree.disabled=true;modal.style.display='flex';}
       function close(){modal.style.display='none';url=null;}
-      check.addEventListener('change',()=>agree.disabled=!check.checked);
-      cancel.addEventListener('click',close);
-      document.querySelectorAll('[data-need-consent]').forEach(btn=>{
-        btn.addEventListener('click',e=>{e.preventDefault();open(btn.getAttribute('data-href'));});
-      });
-      agree.addEventListener('click',()=>{if(check.checked&&url){window.location=url;close();}});
+      chk.addEventListener('change',()=>agree.disabled=!chk.checked); cancel.addEventListener('click',close);
+      document.querySelectorAll('[data-need-consent]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();open(b.dataset.href);})); 
+      agree.addEventListener('click',()=>{if(chk.checked&&url){location.href=url;close();}});
     })();
   </script>
+
+  <!-- Logo Fallback -->
   <script>
-/* 若主路徑失敗，自動嘗試幾個常見路徑/檔名/大小寫組合 */
-(function(){
-  const img = document.getElementById('site-logo');
-  if(!img) return;
-
-  const candidates = [
-    // 同層 assets（先試一次換版本參數，逼快取刷新）
-    './assets/logo-pockitEdit-1024.png?v=16',
-    './assets/logo-pockitEdit-1024.png',
-
-    // 若網站根是 docs/，但圖片不小心放在 repo 根層
-    '../assets/logo-pockitEdit-1024.png?v=16',
-    '../assets/logo-pockitEdit-1024.png',
-
-    // 可能的舊檔名或全小寫誤上傳
-    './assets/logo-pocketeditor-transparent.png',
-    '../assets/logo-pocketeditor-transparent.png',
-    './assets/logo-pockitedit-1024.png',
-    '../assets/logo-pockitedit-1024.png',
-
-    // 放錯到同層（非 assets）時的救援
-    './logo-pockitEdit-1024.png',
-    '../logo-pockitEdit-1024.png'
-  ];
-
-  let i = 0;
-  img.addEventListener('error', function onErr(){
-    if (i < candidates.length){
-      img.src = candidates[i++];
-    }else{
-      img.removeEventListener('error', onErr);
-      console.warn('Logo 仍無法載入，請檢查 assets 位置與檔名大小寫。');
-    }
-  }, { once:false });
-})();
-</script>
-
+  (function(){
+    const img=document.getElementById('site-logo'); if(!img) return;
+    const tries=[
+      './assets/logo-pockitEdit-1024.png?v=16','./assets/logo-pockitEdit-1024.png',
+      '../assets/logo-pockitEdit-1024.png?v=16','../assets/logo-pockitEdit-1024.png',
+      './assets/logo-pocketeditor-transparent.png','../assets/logo-pocketeditor-transparent.png',
+      './logo-pockitEdit-1024.png','../logo-pockitEdit-1024.png'
+    ]; let i=0;
+    img.addEventListener('error',function onErr(){ if(i<tries.length){ img.src=tries[i++]; } else { img.removeEventListener('error',onErr);} });
+  })();
+  </script>
 </body>
 </html>
