@@ -5,48 +5,155 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>pockitEdit — 最終用戶授權合約（EULA）</title>
   <meta name="description" content="pockitEdit EULA：使用授權、限制、免責與其他條款。" />
-  <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; img-src 'self' data: https://*.githubusercontent.com; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; frame-src https://www.youtube-nocookie.com; connect-src 'self'; base-uri 'self'; form-action 'self';">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=16">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=16">
-  <link rel="icon" href="./favicon.ico?v=16" sizes="any"><link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png?v=16">
+
+  <!-- Favicons：相對路徑（v=15 破快取） -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=15">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=15">
+  <link rel="icon" href="./favicon.ico?v=15" sizes="any" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png?v=15">
   <meta name="theme-color" content="#0b0d12" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="pockitEdit — 最終用戶授權合約（EULA）">
+  <meta property="og:description" content="使用 pockitEdit 需遵守之授權條款與限制。">
+  <meta property="og:image" content="./assets/og-image.jpg?v=15">
+  <meta property="og:locale" content="zh_TW">
+
   <style>
-    :root{--bg:#0b0d12;--card:#10131a;--text:#e8edf7;--muted:#9db0d0;--bd:#1d2330}
-    *{box-sizing:border-box} body{margin:0;background:radial-gradient(1200px 600px at 20% -10%,#162034,transparent),radial-gradient(1000px 500px at 120% 10%,#19223a,transparent),var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,"Microsoft JhengHei UI",sans-serif}
+    :root{ --bg:#0b0d12; --card:#10131a; --muted:#b7c0d1; --text:#e8edf7; --bd:#1d2330; --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.25); --sec-pad:28px; }
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(1200px 600px at 20% -10%,#162034,transparent), radial-gradient(1000px 500px at 120% 10%,#19223a,transparent), var(--bg); color:var(--text); font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","Microsoft JhengHei UI","PingFang TC",sans-serif}
+    a{color:#8bb3ff;text-decoration:none} a:hover{text-decoration:underline}
     .container{max-width:960px;margin:0 auto;padding:28px}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--bd);border-radius:16px;padding:22px}
     header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-    .logo img{height:56px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))} a{color:#8bb3ff}
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo img{height:56px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
+    .btn{display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid #2b3550;background:#151c2a;color:#e8edf7}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01)); border:1px solid var(--bd); border-radius:var(--radius); box-shadow:var(--shadow)}
+    h1{margin:0 0 6px; font-size:30px}
+    .meta{color:var(--muted); font-size:14px; margin-bottom:18px}
+    .prose{padding:var(--sec-pad); line-height:1.8}
+    .prose h2{margin:22px 0 8px; font-size:22px}
+    .prose h3{margin:18px 0 6px; font-size:18px}
+    .notice{padding:12px 16px; border:1px dashed #2b3550; border-radius:12px; background:#0f1420; margin-bottom:16px}
+    footer{margin:28px 0 8px; color:#9db0d0; display:flex; justify-content:space-between; font-size:13px}
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div class="logo"><img id="site-logo" src="./assets/logo-pockitEdit-1024.png?v=16" alt="pockitEdit"></div>
-      <nav><a href="./">回首頁</a>　|　<a href="./privacy.html">隱私權政策</a></nav>
+      <div class="logo">
+        <img id="site-logo" src="./assets/logo-pockitEdit-1024.png?v=15" alt="pockitEdit">
+        <strong>pockitEdit</strong>
+      </div>
+      <div>
+        <a class="btn" href="./">回首頁</a>
+        <a class="btn" href="./privacy.html">隱私權政策</a>
+        <a class="btn" href="#" onclick="window.print();return false;">列印</a>
+      </div>
     </header>
 
-    <section class="card">
+    <section class="card prose">
       <h1>最終用戶授權合約（EULA）</h1>
-      <p class="muted">最後更新：2025-10-01</p>
-      <h2>1. 授權授與</h2><p>授予您非獨占、不可轉讓、可撤回之使用授權。</p>
-      <h2>2. 使用限制</h2><ul><li>不得逆向工程或移除權利聲明。</li><li>不得轉授權或以違法方式使用。</li></ul>
-      <h2>3. 擁有權</h2><p>本軟體所有權與智慧財產權歸原權利人所有。</p>
-      <h2>4. 第三方元件</h2><p>可能使用開源或第三方元件，遵循其授權。</p>
-      <h2>5. 免責與責任限制</h2><p>軟體按「現狀」提供；在法律許可範圍內，我方不負任何間接損害責任。</p>
-      <h2>6. 終止</h2><p>違反本合約時授權可被終止，並應停止使用與刪除副本。</p>
-      <h2>7. 聯絡</h2><p>hello@smartcut.app</p>
-      <p class="muted" style="font-size:13px">（模板示例，非法律意見。）</p>
+      <div class="meta">最後更新：2025-10-01　|　適用於 pockitEdit 軟體與附屬元件。</div>
+
+      <div class="notice">
+        安裝、下載、存取或使用本軟體，即表示您同意受本 EULA 約束。若您不同意，請勿安裝或使用，並刪除所有副本。
+      </div>
+
+      <h2>1. 授權授與</h2>
+      <p>在您遵守本 EULA 前提下，pockitEdit 授予您一項非獨占、不可轉讓、可撤回之授權，以於您擁有或控制的 Windows 裝置上安裝與使用本軟體。若為付費方案或團隊/企業授權，使用席次、裝置數或功能以您購買之方案為準。</p>
+
+      <h2>2. 使用限制</h2>
+      <ul>
+        <li>不得進行逆向工程、反編譯、反組譯、嘗試取得原始碼（法律另有明文允許者除外）。</li>
+        <li>不得移除、修改任何著作權、商標或其他權利聲明。</li>
+        <li>不得出租、出借、轉授權或以服務代工方式，讓未被授權之第三人使用。</li>
+        <li>不得以違法、侵權、散布惡意程式或侵害他人權益之方式使用本軟體。</li>
+      </ul>
+
+      <h2>3. 擁有權</h2>
+      <p>本軟體由其著作權人與授權方擁有所有權與智慧財產權。本 EULA 僅授與使用授權，不移轉所有權。</p>
+
+      <h2>4. 第三方與開源元件</h2>
+      <p>本軟體可能使用第三方或開放原始碼元件（例如 MoviePy、FFmpeg、Whisper 等）。該等元件依其各自之授權條款使用；必要時我們將於「關於」或隨附檔案中附上授權聲明與原始碼連結。</p>
+
+      <h2>5. 更新與變更</h2>
+      <p>我們可能提供更新、修補或新功能。除另有說明外，更新亦受本 EULA 約束。部分更新可能自動進行。</p>
+
+      <h2>6. 使用者內容</h2>
+      <p>您對於使用本軟體處理的素材、輸出與內容保有權利與責任。您保證對素材擁有合法權限，且使用不侵害第三人權利。</p>
+
+      <h2>7. 資料與遙測</h2>
+      <p>預設情況下，pockitEdit 於本機離線運作，不會自動上傳您的媒體或輸出。若您自願回傳錯誤報告或啟用雲端服務，相關資料之處理方式依 <a href="./privacy.html">隱私權政策</a> 規範。</p>
+
+      <h2>8. 免責聲明</h2>
+      <p>本軟體係依「現狀」及「可用性」提供，不作任何明示或默示擔保，包括但不限於適售性、特定目的適用性、非侵權等。您應自行承擔使用風險。</p>
+
+      <h2>9. 責任限制</h2>
+      <p>在法律允許範圍內，pockitEdit 對於任何間接性、附隨性、特別、懲罰性或衍生性損害不負責任；對於直接損害之總責任額，以您就本軟體實際支付之對價為上限（若為免費方案則為新臺幣 0 元）。</p>
+
+      <h2>10. 賠償</h2>
+      <p>您同意因違反本 EULA、侵權或違法使用而導致之第三方主張，對 pockitEdit 及其關係企業、員工與合作夥伴提供抗辯與賠償。</p>
+
+      <h2>11. 終止</h2>
+      <p>一旦您違反本 EULA 或我們基於任何合法理由終止授權，您的使用權將立即終止；您應停止使用並刪除所有副本。終止不影響一方既存之求償權。</p>
+
+      <h2>12. 出口管制與制裁</h2>
+      <p>您保證遵守適用之出口管制與經濟制裁法規，不得將本軟體輸出或提供予受限制之國家與對象。</p>
+
+      <h2>13. 準據法與爭議解決</h2>
+      <p>本 EULA 準據法以您主要居所地之強制性法規為限；在不與強制法衝突下，補充以中華民國（臺灣）法律為準據。爭議由臺灣臺北地方法院為第一審管轄法院（或依強制法另行指定）。</p>
+
+      <h2>14. 其他</h2>
+      <ul>
+        <li>若本 EULA 任一條款被認定無效，其餘條款仍有效。</li>
+        <li>未行使任何權利，不視為權利之拋棄。</li>
+        <li>我們得於網站公告更新本 EULA；重大變更將另行提示。</li>
+      </ul>
+
+      <h2>15. 聯絡方式</h2>
+      <p>授權與商務洽詢：<a href="mailto:hello@smartcut.app">hello@smartcut.app</a></p>
+
+      <p style="margin-top:16px;color:#9db0d0;font-size:13px">（本頁範本僅供參考，不構成法律意見。若您的使用情境涉商業或大量部署，建議諮詢律師調整條款。）</p>
     </section>
 
-    <footer style="margin:22px 0;color:#9db0d0">© <span id="y"></span> pockitEdit</footer>
+    <footer>
+      <div>© <span id="y"></span> pockitEdit</div>
+      <div>
+        <a href="./">首頁</a> ·
+        <a href="./privacy.html">隱私權政策</a>
+      </div>
+    </footer>
   </div>
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+
+  <!-- Logo 路徑自動補救（與 index 同步） -->
   <script>
-  (function(){const img=document.getElementById('site-logo');if(!img)return;const t=['./assets/logo-pockitEdit-1024.png?v=16','./assets/logo-pockitEdit-1024.png','../assets/logo-pockitEdit-1024.png?v=16','../assets/logo-pockitEdit-1024.png'];let i=0;img.addEventListener('error',function onErr(){if(i<t.length){img.src=t[i++];}else img.removeEventListener('error',onErr);});})();
+  (function(){
+    const img = document.getElementById('site-logo');
+    if(!img) return;
+    const candidates = [
+      './assets/logo-pockitEdit-1024.png?v=15',
+      './assets/logo-pockitEdit-1024.png',
+      '../assets/logo-pockitEdit-1024.png?v=15',
+      '../assets/logo-pockitEdit-1024.png',
+      './assets/logo-pocketeditor-transparent.png',
+      '../assets/logo-pocketeditor-transparent.png',
+      './logo-pockitEdit-1024.png',
+      '../logo-pockitEdit-1024.png'
+    ];
+    let i = 0;
+    img.addEventListener('error', function onErr(){
+      if (i < candidates.length){
+        img.src = candidates[i++];
+      }else{
+        img.removeEventListener('error', onErr);
+        console.warn('Logo 仍無法載入，請檢查 assets 位置與檔名大小寫。');
+      }
+    });
+  })();
   </script>
 </body>
 </html>
