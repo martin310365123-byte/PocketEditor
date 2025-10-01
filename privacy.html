@@ -3,101 +3,133 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PocketEditor — 隱私權政策</title>
-  <meta name="description" content="PocketEditor 隱私權政策：本機離線處理、不預設蒐集個資；站上僅用必要日誌與第三方服務（GitHub Pages、YouTube-nocookie、GitHub Releases）。提供您的權利、保存、資安與聯絡方式。" />
-  <link rel="icon" href="./favicon.ico" />
+  <title>pockitEdit — 隱私權政策</title>
+  <meta name="description" content="pockitEdit 隱私權政策：說明我們如何收集、使用與保護您的資料。" />
 
-  <!-- 社群預覽（OG / Twitter） -->
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="PocketEditor — 隱私權政策" />
-  <meta property="og:description" content="本機離線處理、不預設蒐集個人資料；如啟用第三方服務將另行告知並徵得同意。" />
-  <meta property="og:image" content="assets/og-image.jpg" />
-  <meta property="og:locale" content="zh_TW" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <!-- Favicons（指向 /pockitEdit/；版本參數破快取） -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/pockitEdit/favicon-32x32.png?v=12">
+  <link rel="icon" type="image/png" sizes="16x16" href="/pockitEdit/favicon-16x16.png?v=12">
+  <link rel="icon" href="/pockitEdit/favicon.ico?v=12" sizes="any" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/pockitEdit/assets/apple-touch-icon.png?v=12">
+  <meta name="theme-color" content="#0b0d12" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="pockitEdit — 隱私權政策">
+  <meta property="og:description" content="我們如何收集、使用、保存您的個人資料，以及您的權利。">
+  <meta property="og:image" content="/pockitEdit/assets/og-image.jpg?v=12">
+  <meta property="og:locale" content="zh_TW">
 
   <style>
-    :root{--bg:#0b0d12;--card:#10131a;--muted:#b7c0d1;--text:#e8edf7;--acc:#8bb3ff;--bd:#1d2330;--radius:16px}
+    :root{ --bg:#0b0d12; --card:#10131a; --muted:#b7c0d1; --text:#e8edf7; --bd:#1d2330; --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.25); --sec-pad:28px; }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","Microsoft JhengHei UI","PingFang TC",sans-serif}
+    body{margin:0;background:radial-gradient(1200px 600px at 20% -10%,#162034,transparent), radial-gradient(1000px 500px at 120% 10%,#19223a,transparent), var(--bg); color:var(--text); font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","Microsoft JhengHei UI","PingFang TC",sans-serif}
+    a{color:#8bb3ff;text-decoration:none} a:hover{text-decoration:underline}
     .container{max-width:960px;margin:0 auto;padding:28px}
-    a{color:var(--acc);text-decoration:none}
-    a:hover{text-decoration:underline}
-    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--bd);border-radius:var(--radius);padding:22px}
-    h1{margin:8px 0 4px}
-    h2{margin-top:28px}
-    .muted{color:var(--muted)}
-    ul, p{line-height:1.7}
-    code{background:#0f1420;border:1px solid #1f2740;padding:2px 6px;border-radius:8px}
-
-    /* 列印友善 */
-    @media print {
-      body { background:#fff; color:#000; }
-      .card { background:#fff; border:1px solid #333; }
-      a { color:#000; }
-      a::after { content:" (" attr(href) ")"; font-size:12px; }
-    }
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo img{height:56px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
+    .btn{display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid #2b3550;background:#151c2a;color:#e8edf7}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01)); border:1px solid var(--bd); border-radius:var(--radius); box-shadow:var(--shadow)}
+    h1{margin:0 0 6px; font-size:30px}
+    .meta{color:var(--muted); font-size:14px; margin-bottom:18px}
+    .prose{padding:var(--sec-pad); line-height:1.8}
+    .prose h2{margin:22px 0 8px; font-size:22px}
+    .prose h3{margin:18px 0 6px; font-size:18px}
+    .toc{padding:12px 16px; border:1px dashed #2b3550; border-radius:12px; background:#0f1420; margin-bottom:16px}
+    footer{margin:28px 0 8px; color:#9db0d0; display:flex; justify-content:space-between; font-size:13px}
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div><a href="index.html">← 返回首頁</a></div>
-      <strong>PocketEditor</strong>
+      <div class="logo">
+        <img src="/pockitEdit/assets/logo-pocketeditor-transparent.png?v=12" alt="pockitEdit">
+        <strong>pockitEdit</strong>
+      </div>
+      <div>
+        <a class="btn" href="/pockitEdit/">回首頁</a>
+        <a class="btn" href="/pockitEdit/eula.html">授權/EULA</a>
+      </div>
     </header>
 
-    <div class="card">
+    <section class="card prose">
       <h1>隱私權政策</h1>
-      <div class="muted">最後更新：2025-09-19</div>
+      <div class="meta">最後更新：2025-10-01　|　適用於 pockitEdit 官方網站與軟體（以下合稱「本服務」）。</div>
 
-      <p>感謝您使用 <strong>PocketEditor</strong>（以下稱「本軟體」）與本官方網站（以下與本軟體合稱「本服務」）。我們尊重並重視您的隱私。本政策說明我們如何在最小化資料蒐集的前提下處理資料，以及您所擁有的權利。</p>
+      <div class="toc">
+        <strong>目錄</strong>
+        <ol>
+          <li><a href="#collect">我們收集哪些資訊</a></li>
+          <li><a href="#use">我們如何使用資訊</a></li>
+          <li><a href="#share">分享與第三方</a></li>
+          <li><a href="#cookie">Cookie 與分析</a></li>
+          <li><a href="#retain">保存期限與安全</a></li>
+          <li><a href="#rights">您的權利</a></li>
+          <li><a href="#children">兒少保護</a></li>
+          <li><a href="#intl">國際傳輸</a></li>
+          <li><a href="#changes">政策變更</a></li>
+          <li><a href="#contact">聯絡我們</a></li>
+        </ol>
+      </div>
 
-      <h2>1. 適用範圍</h2>
-      <p>本政策適用於： (a) 本軟體在您裝置上的運作；(b) 本網站（含文件、下載與支援頁）。若您連至第三方網站或服務（例如 YouTube、GitHub），其隱私政策由該第三方訂定。</p>
-
-      <h2>2. 我們如何處理資料</h2>
+      <h2 id="collect">1. 我們收集哪些資訊</h2>
       <ul>
-        <li><strong>本機離線處理：</strong>本軟體預設於您的電腦本機執行，不會自動上傳素材、輸出或個人資料到我們的伺服器。</li>
-        <li><strong>不預設蒐集個資：</strong>我們不會在您不知情的情況下，主動蒐集可識別個人的資料。</li>
-        <li><strong>選用遙測（目前未啟用）：</strong>若未來提供匿名使用統計或錯誤回傳，將於軟體或網站明確告知並徵得您的同意。</li>
+        <li><strong>您主動提供</strong>：電子郵件、問題回報內容、授權申請或商業洽談資料。</li>
+        <li><strong>網站使用資料</strong>：瀏覽器類型、參照頁、瀏覽時間與頁面互動（僅於您同意 Cookie/分析時）。</li>
+        <li><strong>離線執行聲明</strong>：pockitEdit 軟體在本機端運作，除非您選擇啟用雲端功能或回傳錯誤報告，否則我們不會接觸您的素材或輸出檔。</li>
       </ul>
 
-      <h2>3. 日誌與錯誤報告</h2>
+      <h2 id="use">2. 我們如何使用資訊</h2>
       <ul>
-        <li><strong>本機日誌：</strong>為便於除錯，本軟體可能於本機產生處理日誌；日誌不會自動上傳。</li>
-        <li><strong>問題回報：</strong>您可透過 GitHub Issues、電子郵件等方式主動提供資訊。請避免上傳含個資或機密之素材；相關資料將依用途處理後刪除或匿名化。</li>
+        <li>提供、維護與改進本服務（例如除錯、改善效能與易用性）。</li>
+        <li>回覆您的聯絡、售後與技術支援需求。</li>
+        <li>遵循法律義務（例如處理濫用、權利要求或資安事件）。</li>
       </ul>
 
-      <h2>4. 網站與第三方服務</h2>
+      <h2 id="share">3. 分享與第三方</h2>
+      <p>我們不會販售您的個資。僅在必要時與下列對象分享：</p>
       <ul>
-        <li><strong>GitHub Pages 託管：</strong>本網站由 GitHub Pages 提供。伺服器可能產生必要連線記錄（如 IP、錯誤日誌）。詳見 GitHub 之隱私政策。</li>
-        <li><strong>YouTube 影片嵌入：</strong>使用 <code>youtube-nocookie.com</code> 以減少追蹤；您播放影片時，YouTube 可能寫入必要 cookie 或使用追蹤技術。詳見 <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 隱私政策</a>。</li>
-        <li><strong>下載（Releases）：</strong>軟體經由 GitHub Releases 提供，相關互動受 <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub 隱私政策</a> 與服務條款拘束。</li>
-        <li><strong>Cookie：</strong>本站不主動放置行銷追蹤 cookie；第三方服務可能依其政策使用必要 cookie。</li>
+        <li><strong>服務供應商</strong>：如雲端託管、錯誤追蹤、郵件發送等代管商，並與之簽訂資料保護條款。</li>
+        <li><strong>法律要求</strong>：依法令、法院或政府機關之合法請求。</li>
+        <li><strong>權利保護</strong>：為保護使用者、我們或他人之權益、安全與財產。</li>
       </ul>
 
-      <h2>5. 您的選擇與權利</h2>
+      <h2 id="cookie">4. Cookie 與分析</h2>
+      <p>本站可能使用必要 Cookie 以維持基本功能。若您同意，我們亦可能使用分析 Cookie（如自架或第三方分析）以了解網站使用情形。您可隨時在瀏覽器刪除或封鎖 Cookie；若如此，部分功能可能受限。</p>
+
+      <h2 id="retain">5. 保存期限與安全</h2>
       <ul>
-        <li>您可選擇不提供任何個人資料；多數功能仍可在本機使用。</li>
-        <li>如您提供聯絡資訊（如電子郵件），可隨時要求查詢、更新或刪除。</li>
-        <li>若您位於具個資保護法之司法轄區（如 GDPR），您可能享有存取、更正、刪除、限制處理與資料可攜等權利；請來信聯繫。</li>
+        <li>我們在達成蒐集目的所需期間內保存資料，或依法律要求之期限保存。</li>
+        <li>採取合理之技術與組織安全措施；惟任何系統皆無法保證 100% 安全。</li>
       </ul>
 
-      <h2>6. 資料保存</h2>
-      <p>我們不在伺服器保存您的素材或輸出。因支援或客服用途而取得之資料，將在目的完成或法定保存期間屆滿後刪除或匿名化。</p>
+      <h2 id="rights">6. 您的權利</h2>
+      <p>依適用法規（例如 GDPR、臺灣個資法等），您可能享有查詢、更正、刪除、限制處理、資料可攜與撤回同意等權利。請參見「<a href="#contact">聯絡我們</a>」提出申請，我們將於合理期間回覆。</p>
 
-      <h2>7. 資訊安全</h2>
-      <p>我們採行合宜的技術與管理措施維護安全，例如最小權限、依賴套件定期更新、網站僅讀部署。亦請您維持良好資安習慣並更新至最新版本。</p>
+      <h2 id="children">7. 兒少保護</h2>
+      <p>本服務無意圖對 13 歲（或當地法定年齡）以下兒童行銷或收集個資。若您為監護人並認為我們誤收集兒少資料，請立即與我們聯繫。</p>
 
-      <h2>8. 兒少保護</h2>
-      <p>本服務非為 13 歲以下兒童設計。若您為未成年人，請在法定代理人監護下使用。</p>
+      <h2 id="intl">8. 國際傳輸</h2>
+      <p>您的資料可能被處理或儲存在您所在國以外之地區；我們會確保在跨境傳輸時採取適當保護措施（例如標準合約條款）。</p>
 
-      <h2>9. 政策變更</h2>
-      <p>重大變更將以醒目方式告知；頁面上方會標示「最後更新」日期。新版本發布後，您持續使用即視為同意變更。</p>
+      <h2 id="changes">9. 政策變更</h2>
+      <p>我們可能不時更新本政策；重要修改將於本頁公告並更新「最後更新」日期。持續使用本服務即表示您同意更新後之政策。</p>
 
-      <h2>10. 聯絡我們</h2>
-      <p>隱私問題請來信：<a href="mailto:privacy@pocketeditor.app">privacy@pocketeditor.app</a>（可改為您的正式信箱）。</p>
-    </div>
+      <h2 id="contact">10. 聯絡我們</h2>
+      <p>若您對本政策或資料保護有任何疑問，歡迎來信：<a href="mailto:hello@smartcut.app">hello@smartcut.app</a>。</p>
+
+      <p style="margin-top:16px;color:#9db0d0;font-size:13px">（本頁範本僅供參考，不構成法律意見。）</p>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> pockitEdit</div>
+      <div>
+        <a href="/pockitEdit/">首頁</a> ·
+        <a href="/pockitEdit/eula.html">EULA</a>
+      </div>
+    </footer>
   </div>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
