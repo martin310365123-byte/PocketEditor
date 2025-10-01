@@ -12,8 +12,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png?v=15">
   <meta name="theme-color" content="#0b0d12" />
 
-  <!-- 自動跳轉到 GitHub Release 檔案（改成你的實際檔案名） -->
-  <meta http-equiv="refresh" content="3;url=https://github.com/martin310365123-byte/pockitEdit/releases/latest/download/PocketEditor_v0.1.zip">
+  <!-- 這裡先導去「最新 Release 頁面」，一定不會 404 -->
+  <meta http-equiv="refresh" content="3;url=https://github.com/martin310365123-byte/pockitEdit/releases/latest">
 
   <style>
     :root{ --bg:#0b0d12; --card:#10131a; --text:#e8edf7; --muted:#9db0d0; }
@@ -38,21 +38,23 @@
       <img src="./assets/logo-pockitEdit-1024.png?v=15" alt="pockitEdit">
     </div>
     <h1>正在準備下載…</h1>
-    <p>3 秒後自動下載檔案。</p>
-    <p>若沒有自動開始，請點這裡：<br>
-      <a href="https://github.com/martin310365123-byte/pockitEdit/releases/latest/download/PocketEditor_v0.1.zip">
-        手動下載
+    <p>3 秒後將前往 GitHub Release 頁面。</p>
+    <p>若沒有自動跳轉，請點這裡：<br>
+      <a href="https://github.com/martin310365123-byte/pockitEdit/releases/latest">
+        前往最新 Release
       </a>
     </p>
   </div>
 
-  <!-- 這裡可加追蹤碼 -->
+  <!-- GA 下載事件（可選） -->
   <script>
-    // 範例：Google Analytics 事件
-    // gtag('event', 'download_click', { 'event_category': 'Download', 'event_label': 'PocketEditor v0.1' });
+    // 範例：GA4 事件 (換成你的 GA 測量 ID 才會生效)
+    // gtag('event', 'download_page_view', {
+    //   event_category: 'Download',
+    //   event_label: 'Release latest'
+    // });
 
-    // 範例：先用 console 測試
-    console.log("Download page viewed — 可在這裡串 GA/Plausible 追蹤");
+    console.log("Download page opened — 正在導向 Release 頁面");
   </script>
 </body>
 </html>
