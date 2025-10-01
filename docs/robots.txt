@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /download.html
+
+# （可選）如果你還有其他不想被收錄的路徑，就加在下面：
+# Disallow: /beta/
+# Disallow: /private/
+# Disallow: /assets/tmp/
+# 你有 sitemap 的話也可宣告（可省略）
+# Sitemap: https://<你的帳號>.github.io/<你的repo>/sitemap.xml
