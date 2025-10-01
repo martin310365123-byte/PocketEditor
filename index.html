@@ -346,5 +346,27 @@
       });
     })();
   </script>
+  <script>
+(function(){
+  const img = document.getElementById('site-logo');
+  if(!img) return;
+  const tries = [
+    './assets/logo-pockitEdit-1024.png?v=15',
+    './assets/logo-pockitEdit-1024.png',          // 去掉版本參數
+    './assets/logo-pockitedit-1024.png?v=15',     // 全小寫備援
+    './assets/logo-pocketeditor-transparent.png', // 舊檔名備援
+    './logo-pockitEdit-1024.png?v=15'             // 如果放錯到根層
+  ];
+  let i = 0;
+  img.addEventListener('error', function onErr(){
+    if (i < tries.length){
+      img.src = tries[i++];
+    } else {
+      img.removeEventListener('error', onErr);
+      console.warn('Logo 路徑仍找不到，請檢查 assets/ 位置與檔名大小寫。');
+    }
+  });
+})();
+</script>
 </body>
 </html>
