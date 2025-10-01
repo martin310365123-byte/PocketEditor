@@ -6,17 +6,17 @@
   <title>pockitEdit — 最終用戶授權合約（EULA）</title>
   <meta name="description" content="pockitEdit EULA：使用授權、限制、免責與其他條款。" />
 
-  <!-- Favicons：相對路徑（v=14 破快取） -->
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=14">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=14">
-  <link rel="icon" href="./favicon.ico?v=14" sizes="any" type="image/x-icon">
-  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png?v=14">
+  <!-- Favicons：相對路徑（v=15 破快取） -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=15">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=15">
+  <link rel="icon" href="./favicon.ico?v=15" sizes="any" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png?v=15">
   <meta name="theme-color" content="#0b0d12" />
 
   <meta property="og:type" content="article">
   <meta property="og:title" content="pockitEdit — 最終用戶授權合約（EULA）">
   <meta property="og:description" content="使用 pockitEdit 需遵守之授權條款與限制。">
-  <meta property="og:image" content="./assets/og-image.jpg?v=14">
+  <meta property="og:image" content="./assets/og-image.jpg?v=15">
   <meta property="og:locale" content="zh_TW">
 
   <style>
@@ -43,7 +43,7 @@
   <div class="container">
     <header>
       <div class="logo">
-        <img src="./assets/logo-pockitEdit-1024.png?v=14" alt="pockitEdit">
+        <img id="site-logo" src="./assets/logo-pockitEdit-1024.png?v=15" alt="pockitEdit">
         <strong>pockitEdit</strong>
       </div>
       <div>
@@ -128,5 +128,32 @@
   </div>
 
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+
+  <!-- Logo 路徑自動補救（與 index 同步） -->
+  <script>
+  (function(){
+    const img = document.getElementById('site-logo');
+    if(!img) return;
+    const candidates = [
+      './assets/logo-pockitEdit-1024.png?v=15',
+      './assets/logo-pockitEdit-1024.png',
+      '../assets/logo-pockitEdit-1024.png?v=15',
+      '../assets/logo-pockitEdit-1024.png',
+      './assets/logo-pocketeditor-transparent.png',
+      '../assets/logo-pocketeditor-transparent.png',
+      './logo-pockitEdit-1024.png',
+      '../logo-pockitEdit-1024.png'
+    ];
+    let i = 0;
+    img.addEventListener('error', function onErr(){
+      if (i < candidates.length){
+        img.src = candidates[i++];
+      }else{
+        img.removeEventListener('error', onErr);
+        console.warn('Logo 仍無法載入，請檢查 assets 位置與檔名大小寫。');
+      }
+    });
+  })();
+  </script>
 </body>
 </html>
